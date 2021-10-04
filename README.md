@@ -1,4 +1,4 @@
 # covid-vaccines
-A domestic and global analysis of COVID-19 vaccine distribution and breakthrough cases
+A domestic and global analysis of COVID-19 vaccine distribution and breakthrough cases! 
+Sub analysis of COVID-19 Variants
 
-Made a change! Hi Katie! I hope you can see my change. New line 
