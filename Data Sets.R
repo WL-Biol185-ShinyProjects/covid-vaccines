@@ -37,5 +37,5 @@ ggplot(variants_popular, aes(month, n, fill = variant)) +
   coord_flip() +
   theme_classic()
 #adding a line
-
+#and another
   
