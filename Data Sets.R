@@ -36,5 +36,6 @@ ggplot(variants_popular, aes(month, n, fill = variant)) +
   facet_wrap(~year) +
   coord_flip() +
   theme_classic()
+#adding a line
 
   
