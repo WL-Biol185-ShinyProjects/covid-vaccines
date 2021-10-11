@@ -1,0 +1,18 @@
+```{r}
+library(tidyverse)
+
+vaccines <- country_vaccinations_by_manufacturer
+
+countries <- vaccines %>%
+  group_by(location, vaccine) %>%
+  summarise(
+    vaccines_by_manu = sum(total_vaccinations)
+  )
+
+##objective 
+#Make a heat map by country for the number of vaccines distributed by manufacturer in each country. Let shiny pick a drop down for vaccine manufacturer and the output is a global heat map where color indicates the total number of vaccines distributed 
+
+# https://data4help.medium.com/how-to-create-country-heatmaps-in-r-dbfe5ad6e2f1
+
+
+```
