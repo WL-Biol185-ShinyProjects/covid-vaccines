@@ -47,5 +47,5 @@ latlon_joined <- hopkins %>%
   filter(Date == "2021-10-10") %>%
   filter(People_partially_vaccinated != "NA")
   
-
+saveRDS(latlon_joined, file = "LatLon_Countries.RDS")
   
