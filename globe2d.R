@@ -1,29 +1,34 @@
 #adapted from endangered species project on Github: https://github.com/WL-Biol185-ShinyProjects/endangered-species-trends/blob/master/server.R
 
 #country latitudes and long from country-captials.csv
+#vaccine data from hopkins data set 
+
+library(tidyverse)
+library(leaflet)
 
 
+hopkins_lat_long <- readRDS("LatLon_Countries.RDS")
 
 output$VulnerableClass <- renderLeaflet({ 
-  VulnerableClass <- worldData%>%
-    filter( iucn == "VULNERABLE"
-            , species == input$VulnerableClass
-    )
+  VulnerableClass <- hopkins_lat_long%>%
+    # filter( iucn == "VULNERABLE"
+    #         , species == input$VulnerableClass
+    # )
   
   VCountriesGeo <- rgdal::readOGR( "data/countries.geo.json"
                                    , "OGRGeoJSON"
   )
   
-  VCountriesGeo@data <- VCountriesGeo@data %>%
-    left_join( VulnerableClass
-               , by = c( "name" = "country"
-               )
-    )
-  
+  # VCountriesGeo@data <- VCountriesGeo@data %>%
+  #   left_join( VulnerableClass
+  #              , by = c( "name" = "country"
+  #              )
+  #   )
+  # 
   pal <- colorNumeric( "YlOrRd"
-                       , c( min( VulnerableClass$value
+                       , c( min( LatLon_Countries$Doses_admin
                        )
-                       , max( VulnerableClass$value
+                       , max( LatLon_Countries$Doses_admin
                        )
                        )
   )
@@ -36,7 +41,7 @@ output$VulnerableClass <- renderLeaflet({
     )%>%
     addLegend( pal = pal
                , values = ~value
-               , title = "number of species"
+               # , title = "number of species"
                , position = "bottomright"
     )%>%
     setView( lat = 38.0110306
