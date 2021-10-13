@@ -8,6 +8,8 @@ hopkins <- time_series_covid19_vaccine_global
 
 updated <- read.csv("Worldwide Vaccine Data (1).csv")
 
+latlon <- country_capitals <- read_csv("CSVs/country-capitals.csv")
+
 library(lubridate)
 variants_date <- variants %>%
   mutate(year = year(as_date(date))) %>%
@@ -38,4 +40,12 @@ ggplot(variants_popular, aes(month, n, fill = variant)) +
   theme_classic()
 #adding a line
 #and another
+
+#USE THIS ONE
+latlon_joined <- hopkins %>%
+  left_join(country_capitals, by = c("Country_Region" = "CountryName")) %>%
+  filter(Date == "2021-10-10") %>%
+  filter(People_partially_vaccinated != "NA")
+  
+
   
