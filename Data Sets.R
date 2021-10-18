@@ -17,6 +17,8 @@ variants_date <- variants %>%
   mutate(day = day(as_date(date)))
 
 
+
+
 variants_popular <- variants_date %>%
   filter(location == "United States") %>%
   group_by(variant, year, month) %>%
@@ -61,4 +63,22 @@ latlon_joined <- hopkins %>%
   filter(People_partially_vaccinated != "NA")
   
 saveRDS(latlon_joined, file = "LatLon_Countries.RDS")
+
+
+latlon_joined[149, "CapitalLatitude"] <- "38.9072"
+latlon_joined[149, "CapitalLongitude"] <-"77.0369"
+latlon_joined[149, "CapitalName"] <- "Washington DC"
+latlon_joined[149, "CapitalCode"] <- "USA"
+library(leaflet)
+
+latlon_trial <- latlon_joined %>%
+  mutate(lat = as.numeric(CapitalLatitude)) %>%
+  mutate(lon = as.numeric(CapitalLongitude)) %>%
+  mutate(fully_vac = as.factor(People_fully_vaccinated))
+
+leaflet(data = latlon_trial) %>% 
+  addTiles() %>% 
+  addMarkers(popup = ~fully_vac)
+
+#no lat and lon for DC in the USA, there are other countries missing too but less important 
   
