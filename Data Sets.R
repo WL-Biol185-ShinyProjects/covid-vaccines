@@ -66,7 +66,7 @@ saveRDS(latlon_joined, file = "LatLon_Countries.RDS")
 
 
 latlon_joined[149, "CapitalLatitude"] <- "38.9072"
-latlon_joined[149, "CapitalLongitude"] <-"77.0369"
+latlon_joined[149, "CapitalLongitude"] <-"-77.0369"
 latlon_joined[149, "CapitalName"] <- "Washington DC"
 latlon_joined[149, "CapitalCode"] <- "USA"
 library(leaflet)
