@@ -1,6 +1,14 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 ```{r}
 library(tidyverse)
+library(threejs)
+library(rgdal)
 
+#data sets
 vaccines <- country_vaccinations_by_manufacturer
 
 countries <- vaccines %>%
@@ -8,6 +16,49 @@ countries <- vaccines %>%
   summarise(
     vaccines_by_manu = sum(total_vaccinations)
   )
+
+capCoord <- read.csv("~/covid-vaccines/CSVs/country_capitals.csv")
+```
+
+```{r}
+#create the globe
+
+
+#really cool github documentation for three.js 
+# https://bwlewis.github.io/rthreejs/globejs.html 
+
+earth <- system.file("images/world.jpg",  package = "threejs")
+#earth <- system.file("http://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg",  package = "threejs")
+
+# globejs(img=earth, bg="white")
+globejs(img = earth)
+
+
+#will use the .json to outline countries
+countryOutlines <- rgdal::readOGR( "data/countries.geo.json", "OGRGeoJSON")
+                                              
+#want to plot lat lon points on each country, use globejs 
+#show vaccines by Pfizer 
+Pfizer <- countries %>%
+  filter(vaccine == "Pfizer/BioNTech")
+
+library("maptools")
+library("maps")
+
+library("writexl")
+write.csv(world.cities,"~/covid-vaccines/CSVs/worldcities.csv")
+write.csv(Pfizer, "~/covid-vaccines/CSVs/pfizer.csv")
+
+
+#write as excel and manipulate what we want to keep from world cities and combine with Pfizer data and reupload 
+
+data(worldcities_pfizer, package="maps")
+cities <- worldcities_pfizer[order(worldcities_pfizer$vaccines_by_manu,decreasing=TRUE)[1:37],]
+value  <- 100 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
+
+globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
+        rotationlat=-0.34,     rotationlong=-0.38, fov=30)
+
 
 ##objective 
 #Make a heat map by country for the number of vaccines distributed by manufacturer in each country. Let shiny pick a drop down for vaccine manufacturer and the output is a global heat map where color indicates the total number of vaccines distributed 
