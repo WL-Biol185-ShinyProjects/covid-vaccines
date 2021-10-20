@@ -79,6 +79,3 @@ latlon_trial <- latlon_joined %>%
 leaflet(data = latlon_trial) %>% 
   addTiles() %>% 
   addMarkers(popup = ~fully_vac)
-
-#no lat and lon for DC in the USA, there are other countries missing too but less important 
-  
