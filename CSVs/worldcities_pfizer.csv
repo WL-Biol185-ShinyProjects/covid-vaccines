@@ -1,0 +1,38 @@
+,name,country.etc,pop,lat,long,capital,vaccine,vaccines_by_manu
+1,Vienna,Austria,1570976,48.22,16.37,1,Pfizer/BioNTech,143507156
+5501,Brussels,Belgium,1031925,50.83,4.33,1,Pfizer/BioNTech,201107673
+35647,Sofia,Bulgaria,1166143,42.69,23.31,1,Pfizer/BioNTech,27324102
+33694,Santiago,Chile,4893495,-33.46,-70.64,1,Pfizer/BioNTech,863254517
+42603,Zagreb,Croatia,700717,45.8,15.97,1,Pfizer/BioNTech,45299200
+26001,Nicosia,Cyprus,202488,35.16,33.38,1,Pfizer/BioNTech,13719661
+29776,Prague,Czech Republic,1168374,50.08,14.43,1,Pfizer/BioNTech,1183480741
+8176,Copenhagen,Denmark,1091978,55.68,12.57,1,Pfizer/BioNTech,122890998
+30526,Quito,Ecuador,1399814,-0.19,-78.5,1,Pfizer/BioNTech,506429876
+37179,Tallinn,Estonia,392386,59.44,24.74,1,Pfizer/BioNTech,17028341
+14195,Helsinki,Finland,558341,60.17,24.94,1,Pfizer/BioNTech,98331236
+28247,Paris,France,2141839,48.86,2.34,1,Pfizer/BioNTech,8124992573
+4110,Berlin,Germany,3378275,52.52,13.38,1,Pfizer/BioNTech,9835906009
+,City of Victoria,Hong Kong,7598189,22.28,114.1588,1,Pfizer/BioNTech,470497444
+5590,Budapest,Hungary,1700019,47.51,19.08,1,Pfizer/BioNTech,108298649
+31142,Reykjavik,Iceland,114576,64.14,-21.92,1,Pfizer/BioNTech,39097135
+9864,Dublin,Ireland,1030431,53.33,-6.25,1,Pfizer/BioNTech,83454181
+31559,Rome,Italy,2561181,41.89,12.5,1,Pfizer/BioNTech,6840132718
+38440,Tokyo,Japan,8372440,35.67,139.77,1,Pfizer/BioNTech,3768902151
+31237,Riga,Latvia,738386,56.97,24.13,1,Pfizer/BioNTech,101991602
+39814,Vaduz,Liechtenstein,5248,47.14,9.53,1,Pfizer/BioNTech,254284
+40819,Vilnius,Lithuania,542014,54.7,25.27,1,Pfizer/BioNTech,39527886
+21791,Luxemburg,Luxembourg,76380,49.62,6.12,1,Pfizer/BioNTech,9265157
+39986,Valletta,Malta,6748,35.91,14.52,1,Pfizer/BioNTech,10200516
+41743,Willemstad,Netherlands Antilles,98339,12.1,-68.93,1,Pfizer/BioNTech,300746509
+27464,Oslo,Norway,821445,59.91,10.75,1,Pfizer/BioNTech,94578035
+41442,Warsaw,Poland,1634441,52.26,21.02,1,Pfizer/BioNTech,515299199
+21102,Lisbon,Portugal,508209,38.72,-9.14,1,Pfizer/BioNTech,172149507
+5566,Bucharest,Romania,1862930,44.44,26.1,1,Pfizer/BioNTech,1237844877
+5266,Bratislava,Slovakia,422452,48.16,17.13,1,Pfizer/BioNTech,63010962
+21192,Ljubljana,Slovenia,254188,46.06,14.51,1,Pfizer/BioNTech,23459032
+35911,Seoul,South Korea,10409345,37.56,126.99,1,Pfizer/BioNTech,1817342118
+22033,Madrid,Spain,3146804,40.42,-3.71,1,Pfizer/BioNTech,815087773
+36249,Stockholm,Sweden,1260712,59.33,18.07,1,Pfizer/BioNTech,176334423
+4115,Bern,Switzerland,120596,46.95,7.44,1,Pfizer/BioNTech,478398710
+41457,Washington,United States,548359,38.91,-77.02,1,Pfizer/BioNTech,33011832531
+24460,Montevideo,Uruguay,1271664,-34.87,-56.17,1,Pfizer/BioNTech,199711464
