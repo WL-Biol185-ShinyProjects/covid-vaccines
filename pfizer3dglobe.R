@@ -11,3 +11,4 @@ value  <- 1000 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
 
 pfizer_globe <-globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
         rotationlat=-0.34,     rotationlong=-0.38, fov=30)
+
