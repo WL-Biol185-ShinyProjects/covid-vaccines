@@ -7,9 +7,13 @@ editor_options:
 library(tidyverse)
 library(threejs)
 library(rgdal)
+library("maptools")
+library("maps")
+library("writexl")
+library("leaflet")
 
 #data sets
-vaccines <- country_vaccinations_by_manufacturer
+vaccines <- read.csv("~/covid-vaccines/CSVs/country_vaccinations_by_manufacturer.csv")
 
 countries <- vaccines %>%
   group_by(location, vaccine) %>%
@@ -17,12 +21,10 @@ countries <- vaccines %>%
     vaccines_by_manu = sum(total_vaccinations)
   )
 
-capCoord <- read.csv("~/covid-vaccines/CSVs/country_capitals.csv")
 ```
 
 ```{r}
 #create the globe
-
 
 #really cool github documentation for three.js 
 # https://bwlewis.github.io/rthreejs/globejs.html 
@@ -35,23 +37,57 @@ globejs(img = earth)
 
 
 #will use the .json to outline countries
-countryOutlines <- rgdal::readOGR( "data/countries.geo.json", "OGRGeoJSON")
+countryOutlines <- rgdal::readOGR( "~/covid-vaccines/data/countries.geo.json", layer = "countries.geo") 
                                               
 #want to plot lat lon points on each country, use globejs 
 #show vaccines by Pfizer 
 Pfizer <- countries %>%
   filter(vaccine == "Pfizer/BioNTech")
 
-library("maptools")
-library("maps")
+Moderna <- countries %>%
+  filter(vaccine == "Moderna")
 
-library("writexl")
+OxfordAZ <- countries %>%
+  filter(vaccine == "Oxford/AstraZeneca")
+
+#still having issue filtering JJ 
+countries_fixedJJ <- read_csv("~/covid-vaccines/CSVs/countries_fixedJJ.csv") %>%
+  subset(select = -c(X1)) %>%
+
+JJ <- countries_fixedJJ %>%  
+ filter(vaccine == "JJ")
+
+cansino <- countries %>% 
+  filter(vaccine == "CanSino")
+
+sinovac <- countries %>%
+  filter(vaccine == "Sinovac")
+
+sinopharmBeijing <- countries %>% 
+  filter(vaccine == "Sinopharm/Beijing")
+
+SputnikV <- countries %>% 
+  filter(vaccine == "Sputnik V")
+
+write.csv(countries, "~/covid-vaccines/CSVs/countries.csv")
 write.csv(world.cities,"~/covid-vaccines/CSVs/worldcities.csv")
 write.csv(Pfizer, "~/covid-vaccines/CSVs/pfizer.csv")
+write.csv(Moderna, "~/covid-vaccines/CSVs/moderna.csv")
+write.csv(OxfordAZ, "~/covid-vaccines/CSVs/oxfordAZ.csv")
+write.csv(JJ, "~/covid-vaccines/CSVs/jj.csv")
+
 
 
 #write as excel and manipulate what we want to keep from world cities and combine with Pfizer data and reupload 
+worldcities_pfizer <- read.csv("~/covid-vaccines/CSVs/worldcities_pfizer.csv")
+#read xlsx is not working
+worldcities_OxfordAZ <- read.csv("~/covid-vaccines/CSVs/worldcities_OxfordAZ.csv")
+worldcities_OxfordAZ_mutatelatlong <- subset(worldcities_OxfordAZ, select = -c(lat, long))
+names(worldcities_OxfordAZ_mutatelatlong)[4] <- paste("lat")
+names(worldcities_OxfordAZ_mutatelatlong)[5] <- paste("long")
 
+
+#pfizer globe
 data(worldcities_pfizer, package="maps")
 cities <- worldcities_pfizer[order(worldcities_pfizer$vaccines_by_manu,decreasing=TRUE)[1:37],]
 value  <- 100 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
@@ -60,10 +96,65 @@ globejs(bg="black", lat=cities$lat,     long=cities$long, value=value,
         rotationlat=-0.34,     rotationlong=-0.38, fov=30)
 
 
+#pfizer and AZ globe
+pfizer_AZ_join_mutatelatlong <- bind_rows(worldcities_pfizer, worldcities_OxfordAZ_mutatelatlong)
+
+data(pfizer_AZ_join_mutatelatlong, package="maps")
+cities_join_mut <- pfizer_AZ_join_mutatelatlong[order(pfizer_AZ_join_mutatelatlong$vaccines_by_manu,decreasing=TRUE)[1:37],]
+value_join_mut  <- 100 * cities_join_mut$vaccines_by_manu / max(cities_join_mut$vaccines_by_manu)
+
+
+#the color parameter takes a vector the same length as lat and long. Can't index by vaccine
+globejs(bg="black", 
+        lat=cities_join_mut$lat,     
+        long=cities_join_mut$long, 
+        value_join_mut=value,
+        rotationlat=-0.34,     
+        rotationlong=-0.38, 
+        fov=30, 
+        color(pfizer_AZ_join_mutatelatlong[pfizer_AZ_join_mutatelatlong$vaccine=="Pfizer/BioNTech"], "red", pfizer_AZ_join_mutatelatlong[pfizer_AZ_join_mutatelatlong$vaccine=="Oxford/AZ"], "green"))
+
+
+
+  
+pfizer_AZ_join_mutatelatlong <- bind_rows(worldcities_pfizer, worldcities_OxfordAZ_mutatelatlong)
+    
+#for the server to do multiple manufacturers on the same globe: 
+#selectize input multiple  = true 
+#change color for each manufactuer 
+#will need to slightly change lat&long so that spikes aren't exactly on top of one another 
+#start with offset of 0.5
+```
+
+```{r}
 ##objective 
 #Make a heat map by country for the number of vaccines distributed by manufacturer in each country. Let shiny pick a drop down for vaccine manufacturer and the output is a global heat map where color indicates the total number of vaccines distributed 
 
+countryOutlines <- rgdal::readOGR( "~/covid-vaccines/data/countries.geo.json", layer = "countries.geo")
+
+#use leaflet instead of globejs 
+
+TCountriesGeo <- rgdal::readOGR( "data/countries.geo.json"
+                               , "OGRGeoJSON"
+                                )
+TCountriesGeo@data <- TCountriesGeo@data %>%
+                         left_join( ThreatenedClass
+                         , by = c( "name" = "country"
+                                  )
+                                  )
+                                              
+                      pal <- colorNumeric( "YlOrRd"
+                           , c( min(worldcities_pfizer$vaccines_by_manu
+                                    )
+                              , max( worldcities_pfizer$vaccines_by_manu
+                                   )
+                              )
+                                          )
+
+
+
 # https://data4help.medium.com/how-to-create-country-heatmaps-in-r-dbfe5ad6e2f1
-
-
+#spike globe code: 
+# https://bwlewis.github.io/rthreejs/globejs.html 
 ```
+
