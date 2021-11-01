@@ -53,21 +53,24 @@ dashboardPage(skin = "blue",
       
       tabItem(tabName = "Global",
               
-              box(width = 2, selectInput(
-                "vaccine",
-                "Manufacturer:",
+              box(width = 2, selectInput("vaccine","Manufacturer:",
                 c("AstraZeneca" = "Oxford/AstraZeneca",
-                  "Moderna" = "Moderna",
-                  "Pfizer" = "Pfizer/BioNTech",
-                  "Johnson&Johnson" = "JJ")
-                
-              )),
+                      "Moderna" = "Moderna",
+                       "Pfizer" = "Pfizer/BioNTech",
+              "Johnson&Johnson" = "JJ"))),
               
-                    box(width = 12, globeOutput("pfizer_globe")
-                        )
-                            ),
+                    box(width = 12, globeOutput("pfizer_globe"))),
       
-      tabItem(tabName = "Variants"),
+      tabItem(tabName = "Variants",
+              box(width = 12,
+                fluidRow(
+                  valueBoxOutput("CountryBox"),
+                   
+                  valueBoxOutput("VaccinatedBox"),
+                   
+                  valueBoxOutput("Predominant_VaccineBox")
+                ))
+              ),
       
       tabItem(tabName = "Socioeconomics"),
       
