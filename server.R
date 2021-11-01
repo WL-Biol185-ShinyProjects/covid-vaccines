@@ -26,7 +26,6 @@ worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv
 
   
   output$globe <- renderGlobe({
-    
 
 
   x <- worldcities_all_manu %>% 
