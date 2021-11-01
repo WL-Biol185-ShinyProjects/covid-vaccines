@@ -20,18 +20,19 @@ function(input, output) {
 
 
 function(input, output, session) {
-
-
-worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv")
-
+  
+  
+  worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv")
+  
   
   output$globe <- renderGlobe({
-
-
-  x <- worldcities_all_manu %>% 
+  
+    data(worldcities_all_manu, package = "maps") #injection scope, never ever do this again
+    x <- worldcities_all_manu %>% 
          filter(vaccine == input$vaccine) 
-   data(worldcities_all_manu, package = "maps")  
-    cities <- x[order(x$vaccines_by_manu,decreasing=TRUE)[1:37],]
+    print(x)
+    nrows_x <- nrow(x)
+    cities <- x[order(x$vaccines_by_manu,decreasing=TRUE)[1:nrows_x],]
     value  <- 1000 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
     manu_globe <-globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
                            rotationlat=-0.34,     rotationlong=-0.38, fov=30)
