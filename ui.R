@@ -30,13 +30,13 @@ dashboardPage(skin = "blue",
       #                format = "mm/dd/yy",
       #                separator = " - "),
       
-      menuItem("Global View", tabName = "Global View", 
+      menuItem("Global", tabName = "Global", 
                icon = icon("globe", lib = "glyphicon")),
       
-      menuItem("Global Variants", tabName = "Variants by Country", 
+      menuItem("Variants", tabName = "Variants", 
                icon = icon("random", lib = "glyphicon")),
       
-      menuItem("Vaccine and Wealth", tabName = "Vaccine and Wealth", 
+      menuItem("Socioeconomics", tabName = "Socioeconomics", 
                icon = icon("th")),
       
       menuItem("Continents", tabName = "Continents", 
@@ -51,30 +51,38 @@ dashboardPage(skin = "blue",
     
     tabItems(
       
-      tabItem(tabName = "Global View",
+      tabItem(tabName = "Global",
               
-              ),
+              box(width = 2, selectInput(
+                "vaccine",
+                "Manufacturer:",
+                c("AstraZeneca" = "Oxford/AstraZeneca",
+                  "Moderna" = "Moderna",
+                  "Pfizer" = "Pfizer/BioNTech",
+                  "Johnson&Johnson" = "JJ")
+                
+              )),
+              
+                    box(width = 12, globeOutput("pfizer_globe")
+                        )
+                            ),
       
-      tabItem(tabName = "Variants by Country",
-              
-              fluidRow(
-              
-                box(globeOutput("pfizer_globe")))
-              ),
+      tabItem(tabName = "Variants"),
       
-      tabItem(tabName = "Vaccine and Wealth"),
+      tabItem(tabName = "Socioeconomics"),
       
       tabItem(tabName = "Continents")
+      
     ),
     
 
     
-    # tags$head( 
-    #   tags$style(HTML('.main-sidebar {
-    #     font-family: "Lucida Console", monospace;
-    #     font-weight: bold;
-    #     font-size: 14px; }'))
-    # ),
+    tags$head(
+      tags$style(HTML('.main-sidebar {
+        font-family: "Lucida Console", monospace;
+        font-weight: bold;
+        font-size: 14px; }'))
+    ),
     
 
     
@@ -99,12 +107,12 @@ dashboardPage(skin = "blue",
     uiOutput("hearbeat")
     ),
 
-    
-  # tags$head(tags$style(HTML('
-  #     .main-header .logo {
-  #       font-family: "Lucida Console", monospace;
-  #       font-weight: bold;
-  #       font-size: 24px;
-  #     }'
-  # )))
+
+  tags$head(tags$style(HTML('
+       .main-header .logo {
+         font-family: "Lucida Console", monospace;
+         font-weight: bold;
+         font-size: 24px;
+       }'
+   )))
   )
