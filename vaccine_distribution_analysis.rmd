@@ -11,6 +11,7 @@ library("maptools")
 library("maps")
 library("writexl")
 library("leaflet")
+library(RColorBrewer)
 
 #data sets
 vaccines <- read.csv("~/covid-vaccines/CSVs/country_vaccinations_by_manufacturer.csv")
@@ -30,11 +31,15 @@ countries <- vaccines %>%
 # https://bwlewis.github.io/rthreejs/globejs.html 
 
 earth <- system.file("images/world.jpg",  package = "threejs")
-#earth <- system.file("http://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg",  package = "threejs")
 
-# globejs(img=earth, bg="white")
+earth <- "http://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg"
 globejs(img = earth)
 
+
+#uses better picture of earth but it's not currently running 
+#earth_better <- system.file("~/covid-vaccines/images/earthmap.jpg", package = "threejs")
+
+globejs(img = earth_better)
 
 #will use the .json to outline countries
 countryOutlines <- rgdal::readOGR( "~/covid-vaccines/data/countries.geo.json", layer = "countries.geo") 
@@ -50,7 +55,7 @@ Moderna <- countries %>%
 OxfordAZ <- countries %>%
   filter(vaccine == "Oxford/AstraZeneca")
 
-#still having issue filtering JJ 
+#filter JJ 
 countries_fixedJJ <- read_csv("~/covid-vaccines/CSVs/countries_fixedJJ.csv") %>%
   subset(select = -c(X1)) %>%
 
@@ -75,8 +80,10 @@ write.csv(Pfizer, "~/covid-vaccines/CSVs/pfizer.csv")
 write.csv(Moderna, "~/covid-vaccines/CSVs/moderna.csv")
 write.csv(OxfordAZ, "~/covid-vaccines/CSVs/oxfordAZ.csv")
 write.csv(JJ, "~/covid-vaccines/CSVs/jj.csv")
-
-
+write.csv(cansino, "~/covid-vaccines/CSVs/cansino.csv")
+write.csv(sinovac, "~/covid-vaccines/CSVs/sinovac.csv")
+write.csv(sinopharmBeijing, "~/covid-vaccines/CSVs/jj.csv")
+write.csv(SputnikV, "~/covid-vaccines/CSVs/sputnikV.csv")
 
 #write as excel and manipulate what we want to keep from world cities and combine with Pfizer data and reupload 
 worldcities_pfizer <- read.csv("~/covid-vaccines/CSVs/worldcities_pfizer.csv")
@@ -86,6 +93,7 @@ worldcities_OxfordAZ_mutatelatlong <- subset(worldcities_OxfordAZ, select = -c(l
 names(worldcities_OxfordAZ_mutatelatlong)[4] <- paste("lat")
 names(worldcities_OxfordAZ_mutatelatlong)[5] <- paste("long")
 
+#will eventually use the combined data set worldcities_all_manu and allow the user interface to filter by manufacturer
 
 #pfizer globe
 data(worldcities_pfizer, package="maps")
@@ -104,26 +112,33 @@ cities_join_mut <- pfizer_AZ_join_mutatelatlong[order(pfizer_AZ_join_mutatelatlo
 value_join_mut  <- 100 * cities_join_mut$vaccines_by_manu / max(cities_join_mut$vaccines_by_manu)
 
 
-#the color parameter takes a vector the same length as lat and long. Can't index by vaccine
-globejs(bg="black", 
-        lat=cities_join_mut$lat,     
-        long=cities_join_mut$long, 
-        value_join_mut=value,
-        rotationlat=-0.34,     
-        rotationlong=-0.38, 
-        fov=30, 
-        color(pfizer_AZ_join_mutatelatlong[pfizer_AZ_join_mutatelatlong$vaccine=="Pfizer/BioNTech"], "red", pfizer_AZ_join_mutatelatlong[pfizer_AZ_join_mutatelatlong$vaccine=="Oxford/AZ"], "green"))
+#use dataset with all manufacturers
+#filter by manufacturer
+#color by rank_by_manufacturer
+worldcities_rank_by_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_rank_by_manu.csv")
 
+pfizer_ranked <- worldcities_rank_by_manu %>%
+  filter(vaccine == "Pfizer/BioNTech")
+
+
+data(pfizer_ranked, package="maps")
+cities <- pfizer_ranked[order(pfizer_ranked$vaccines_by_manu,decreasing=TRUE)[1:37],]
+value  <- 100 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
+palette = display.brewer.pal(9, YlOrRd)
+colors = palette[pfizer_ranked$rank_by_manu]
+
+
+globejs(bg="black",
+        lat=cities$lat,
+        long=cities$long, 
+        value=value, 
+        color=colors
+        rotationlat=-0.34, 
+        rotationlong=-0.38, 
+        fov=30)
 
 
   
-pfizer_AZ_join_mutatelatlong <- bind_rows(worldcities_pfizer, worldcities_OxfordAZ_mutatelatlong)
-    
-#for the server to do multiple manufacturers on the same globe: 
-#selectize input multiple  = true 
-#change color for each manufactuer 
-#will need to slightly change lat&long so that spikes aren't exactly on top of one another 
-#start with offset of 0.5
 ```
 
 ```{r}
