@@ -53,7 +53,7 @@ dashboardPage(skin = "blue",
       
       tabItem(tabName = "Global",
               
-              selectInput(
+            selectInput(
                 "vaccine",
                 "Manufacturer:",
                 c("AstraZeneca" = "Oxford/AstraZeneca",
@@ -67,7 +67,16 @@ dashboardPage(skin = "blue",
                         )
                             ),
       
-      tabItem(tabName = "Variants"),
+      tabItem(tabName = "Variants",
+              box(width = 12,
+                fluidRow(
+                  valueBoxOutput("CountryBox"),
+                   
+                  valueBoxOutput("VaccinatedBox"),
+                   
+                  valueBoxOutput("Predominant_VaccineBox")
+                ))
+              ),
       
       tabItem(tabName = "Socioeconomics"),
       

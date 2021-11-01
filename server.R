@@ -27,6 +27,7 @@ worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv
   
   output$globe <- renderGlobe({
     
+data(worldcities_all_manu, package = "maps")
   x <- worldcities_all_manu %>% 
          filter(vaccine == input$vaccine) 
     
