@@ -1,0 +1,147 @@
+"","location","vaccine","vaccines_by_manu"
+"1","Austria","Johnson&Johnson",3648375
+"2","Austria","Moderna",19341794
+"3","Austria","Oxford/AstraZeneca",34052660
+"4","Austria","Pfizer/BioNTech",143507156
+"5","Belgium","Johnson&Johnson",5546947
+"6","Belgium","Moderna",24025655
+"7","Belgium","Oxford/AstraZeneca",54251279
+"8","Belgium","Pfizer/BioNTech",201107673
+"9","Bulgaria","Johnson&Johnson",1701150
+"10","Bulgaria","Moderna",5732847
+"11","Bulgaria","Oxford/AstraZeneca",12036132
+"12","Bulgaria","Pfizer/BioNTech",27324102
+"13","Chile","CanSino",52626023
+"14","Chile","Oxford/AstraZeneca",56258092
+"15","Chile","Pfizer/BioNTech",863254517
+"16","Chile","Sinovac",3198671375
+"17","Croatia","Johnson&Johnson",972927
+"18","Croatia","Moderna",6766788
+"19","Croatia","Oxford/AstraZeneca",12570048
+"20","Croatia","Pfizer/BioNTech",45299200
+"21","Cyprus","Johnson&Johnson",305020
+"22","Cyprus","Moderna",1548126
+"23","Cyprus","Oxford/AstraZeneca",5292514
+"24","Cyprus","Pfizer/BioNTech",13719661
+"25","Czechia","Johnson&Johnson",18408523
+"26","Czechia","Moderna",122051269
+"27","Czechia","Oxford/AstraZeneca",120943047
+"28","Czechia","Pfizer/BioNTech",1183480741
+"29","Denmark","Johnson&Johnson",752538
+"30","Denmark","Moderna",15363288
+"31","Denmark","Oxford/AstraZeneca",4731451
+"32","Denmark","Pfizer/BioNTech",122890998
+"33","Ecuador","CanSino",10219800
+"34","Ecuador","Oxford/AstraZeneca",195160293
+"35","Ecuador","Pfizer/BioNTech",506429876
+"36","Ecuador","Sinovac",856681619
+"37","Estonia","Johnson&Johnson",648261
+"38","Estonia","Moderna",2333326
+"39","Estonia","Oxford/AstraZeneca",5770932
+"40","Estonia","Pfizer/BioNTech",17028341
+"41","European Union","Johnson&Johnson",1348008282
+"42","European Union","Moderna",6019169599
+"43","European Union","Oxford/AstraZeneca",9557338019
+"44","European Union","Pfizer/BioNTech",47248974127
+"45","European Union","Sinopharm/Beijing",342717886
+"46","European Union","Sputnik V",295628631
+"47","Finland","Johnson&Johnson",0
+"48","Finland","Moderna",11647789
+"49","Finland","Oxford/AstraZeneca",12905921
+"50","Finland","Pfizer/BioNTech",98331236
+"51","France","Johnson&Johnson",100947200
+"52","France","Moderna",991888370
+"53","France","Oxford/AstraZeneca",1163185932
+"54","France","Pfizer/BioNTech",8124992573
+"55","Germany","Johnson&Johnson",288057450
+"56","Germany","Moderna",1107867178
+"57","Germany","Oxford/AstraZeneca",1892114869
+"58","Germany","Pfizer/BioNTech",9835906009
+"59","Hong Kong","Pfizer/BioNTech",470497444
+"60","Hong Kong","Sinovac",317694037
+"61","Hungary","Johnson&Johnson",2300455
+"62","Hungary","Moderna",15201142
+"63","Hungary","Oxford/AstraZeneca",28443848
+"64","Hungary","Pfizer/BioNTech",108298649
+"65","Hungary","Sinopharm/Beijing",51064333
+"66","Hungary","Sputnik V",43581989
+"67","Iceland","Johnson&Johnson",6157737
+"68","Iceland","Moderna",6671779
+"69","Iceland","Oxford/AstraZeneca",15766232
+"70","Iceland","Pfizer/BioNTech",39097135
+"71","Ireland","Johnson&Johnson",3264846
+"72","Ireland","Moderna",9525001
+"73","Ireland","Oxford/AstraZeneca",23972163
+"74","Ireland","Pfizer/BioNTech",83454181
+"75","Italy","Johnson&Johnson",170705677
+"76","Italy","Moderna",983346025
+"77","Italy","Oxford/AstraZeneca",1621755215
+"78","Italy","Pfizer/BioNTech",6840132718
+"79","Japan","Moderna",141520769
+"80","Japan","Pfizer/BioNTech",3768902151
+"81","Latvia","Johnson&Johnson",10527661
+"82","Latvia","Moderna",31593824
+"83","Latvia","Oxford/AstraZeneca",43081560
+"84","Latvia","Pfizer/BioNTech",101991602
+"85","Liechtenstein","Moderna",486952
+"86","Liechtenstein","Pfizer/BioNTech",254284
+"87","Lithuania","Johnson&Johnson",2025469
+"88","Lithuania","Moderna",4992719
+"89","Lithuania","Oxford/AstraZeneca",11159020
+"90","Lithuania","Pfizer/BioNTech",39527886
+"91","Luxembourg","Johnson&Johnson",587555
+"92","Luxembourg","Moderna",1257323
+"93","Luxembourg","Oxford/AstraZeneca",2216886
+"94","Luxembourg","Pfizer/BioNTech",9265157
+"95","Malta","Johnson&Johnson",407253
+"96","Malta","Moderna",898641
+"97","Malta","Oxford/AstraZeneca",4877247
+"98","Malta","Pfizer/BioNTech",10200516
+"99","Netherlands","Johnson&Johnson",13348940
+"100","Netherlands","Moderna",33390739
+"101","Netherlands","Oxford/AstraZeneca",62460367
+"102","Netherlands","Pfizer/BioNTech",300746509
+"103","Norway","Johnson&Johnson",70785
+"104","Norway","Moderna",15059585
+"105","Norway","Oxford/AstraZeneca",4336432
+"106","Norway","Pfizer/BioNTech",94578035
+"107","Poland","Johnson&Johnson",26822568
+"108","Poland","Moderna",64136524
+"109","Poland","Oxford/AstraZeneca",112940877
+"110","Poland","Pfizer/BioNTech",515299199
+"111","Portugal","Johnson&Johnson",12905665
+"112","Portugal","Moderna",26887138
+"113","Portugal","Oxford/AstraZeneca",43737483
+"114","Portugal","Pfizer/BioNTech",172149507
+"115","Romania","Johnson&Johnson",55342489
+"116","Romania","Moderna",119032025
+"117","Romania","Oxford/AstraZeneca",144501940
+"118","Romania","Pfizer/BioNTech",1237844877
+"119","Slovakia","Johnson&Johnson",703884
+"120","Slovakia","Moderna",9175265
+"121","Slovakia","Oxford/AstraZeneca",18929140
+"122","Slovakia","Pfizer/BioNTech",63010962
+"123","Slovakia","Sputnik V",342361
+"124","Slovenia","Johnson&Johnson",1234130
+"125","Slovenia","Moderna",3578985
+"126","Slovenia","Oxford/AstraZeneca",6681566
+"127","Slovenia","Pfizer/BioNTech",23459032
+"128","South Korea","Johnson&Johnson",134629762
+"129","South Korea","Moderna",195698934
+"130","South Korea","Oxford/AstraZeneca",1870876353
+"131","South Korea","Pfizer/BioNTech",1817342118
+"132","Spain","Johnson&Johnson",30669046
+"133","Spain","Moderna",121170710
+"134","Spain","Oxford/AstraZeneca",196358163
+"135","Spain","Pfizer/BioNTech",815087773
+"136","Sweden","Moderna",24667215
+"137","Sweden","Oxford/AstraZeneca",29334570
+"138","Sweden","Pfizer/BioNTech",176334423
+"139","Switzerland","Moderna",793370336
+"140","Switzerland","Pfizer/BioNTech",478398710
+"141","United States","Johnson&Johnson",2101717813
+"142","United States","Moderna",25023433583
+"143","United States","Pfizer/BioNTech",33011832531
+"144","Uruguay","Oxford/AstraZeneca",10491026
+"145","Uruguay","Pfizer/BioNTech",199711464
+"146","Uruguay","Sinovac",462761476
