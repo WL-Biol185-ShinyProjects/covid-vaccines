@@ -1,6 +1,5 @@
 library(shiny)
 library(utils)
-worldcities_pfizer <- read.csv("CSVs/worldcities_pfizer.csv")
 library(tidyverse)
 library(threejs)
 library("maptools")
@@ -21,26 +20,16 @@ function(input, output) {
 
 
 function(input, output, session) {
+
+
+worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv")
+
   
-  
-  x<- reactive({
-    if(input$vaccine == "Pfizer") {
-      worldcities_all_manu <- worldcities_all_manu %>%
-        filter(vaccine == "Pfizer/BioNTech")}
-    else if(input$vaccine == "Moderna") {
-      worldcities_all_manu <- worldcities_all_manu %>%
-        filter(vaccine == "Moderna")}
-    else if(input$vaccine == "AstraZeneca") {
-      worldcities_all_manu <- worldcities_all_manu %>%
-        filter(vaccine == "Oxford/AstraZeneca")}
-    else if(input$vaccine == "Johnson&Johnson") {
-      worldcities_all_manu <- worldcities_all_manu %>%
-        filter(vaccine == "JJ")}
-  })
-  
-  output$pfizer_globe <- renderGlobe({
+  output$globe <- renderGlobe({
     
-    data(x, package="maps")
+  x <- worldcities_all_manu %>% 
+         filter(vaccine == input$vaccine) 
+    
     cities <- x[order(x$vaccines_by_manu,decreasing=TRUE)[1:37],]
     value  <- 1000 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
     manu_globe <-globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
