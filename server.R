@@ -4,7 +4,7 @@ library(tidyverse)
 library(threejs)
 library("maptools")
 library("maps")
-library("writexl")
+library("writexl") 
 
 
 function(input, output) {
@@ -27,10 +27,11 @@ worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv
   
   output$globe <- renderGlobe({
     
-data(worldcities_all_manu, package = "maps")
+
+
   x <- worldcities_all_manu %>% 
          filter(vaccine == input$vaccine) 
-    
+   data(worldcities_all_manu, package = "maps")  
     cities <- x[order(x$vaccines_by_manu,decreasing=TRUE)[1:37],]
     value  <- 1000 * cities$vaccines_by_manu / max(cities$vaccines_by_manu)
     manu_globe <-globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
