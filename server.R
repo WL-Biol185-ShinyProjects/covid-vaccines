@@ -155,7 +155,7 @@ function(input, output, session) {
   })
   
   output$heartbeat <- renderUI({
-    invalidateLater(40 * 1000, session)
+    invalidateLater(1000, session)
     p(Sys.time(),style = "visibility: hidden;")
   })
   

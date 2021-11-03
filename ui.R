@@ -21,14 +21,7 @@ dashboardPage(skin = "blue",
     a(href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html"),  
  
     sidebarMenu(
-      
-      # dateRangeInput("daterange3", "Date range:",
-      #                start  = "2020-08-01",
-      #                end    = "2021-9-31",
-      #                min    = "2020-08-01",
-      #                max    = "2021-9-31",
-      #                format = "mm/dd/yy",
-      #                separator = " - "),
+    
       
       menuItem("Global", tabName = "Global", 
                icon = icon("globe", lib = "glyphicon")),
@@ -64,7 +57,8 @@ dashboardPage(skin = "blue",
               ),
               
                     box(width = 12, globeOutput("globe")
-                        )
+                        ),
+            p("your mother could never create a globe this dank")
                             ),
       
       tabItem(tabName = "Variants",
@@ -168,6 +162,12 @@ dashboardPage(skin = "blue",
               ),
       
       tabItem(tabName = "Socioeconomics",
+              
+                    p(strong("The data maniputlated on this page is intended to illustrate
+                        disparities between vaccination rates across countries in different 
+                        socioeconmic standings. We hope these
+                        graphical displays accuratly display this global issue.")),
+              
               box(width = 12,
                   fluidRow(
                     valueBoxOutput("CountryBox"),
@@ -193,25 +193,6 @@ dashboardPage(skin = "blue",
         font-size: 14px; }'))
     ),
     
-
-    
-    # fluidRow(
-    # 
-    #   valueBoxOutput("CountryBox"),
-    # 
-    #   valueBoxOutput("VaccinatedBox"),
-    # 
-    #   valueBoxOutput("Predominant_VaccineBox")
-    # ),
-    # 
-    # fluidRow(
-    #   
-    #   box(width = 4, actionButton("count", "Increment progress"))
-    # ),
-    # 
-    # fluidRow(
-    #    box(width = 12, globeOutput("pfizer_globe"))
-    # ),
     
     uiOutput("hearbeat")
     ),
