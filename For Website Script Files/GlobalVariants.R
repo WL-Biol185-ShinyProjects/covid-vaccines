@@ -1,7 +1,7 @@
 #Global Variants
 
 #Goal for website: on line 18, have the location filter as a drop down menu. 
-
+setwd("~/covid-vaccines/CSVs")
 variants <- read.csv("covid-variants.csv")
 
 
