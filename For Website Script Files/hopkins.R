@@ -1,3 +1,5 @@
+setwd("~/covid-vaccines/CSVs")
+
 time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
 hopkins <- time_series_covid19_vaccine_global
 
