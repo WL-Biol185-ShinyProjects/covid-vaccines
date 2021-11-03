@@ -90,7 +90,7 @@ function(input, output, session) {
     
     
     variants_date <- variants %>%
-      mutate(year = year(as_date(date))) %>%
+      mutate(year1 = year1(as_date(date))) %>%
       mutate(month = month(as_date(date))) %>%
       mutate(day = day(as_date(date))) %>%
       filter(variant == "Alpha" | variant == "Delta" | variant == "Gamma" | variant == "Iota" | variant == "Beta" | variant == "Eta" | variant == "Lambda")
