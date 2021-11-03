@@ -68,6 +68,7 @@ function(input, output, session) {
       mutate(World.Share = as.numeric(World.Share))
     
     ggplot(pop_hopkins_fully, aes(reorder(Country_Region, fully_per_capita), 
+
                                   fully_per_capita, fill = World.Share)) + 
       geom_bar(stat = "identity") +
       theme_classic() +
