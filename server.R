@@ -82,9 +82,6 @@ function(input, output, session) {
   
   
   output$globalvariants <- renderPlot ({ 
-    #Global Variants
-    
-    #Goal for website: on line 18, have the location filter as a drop down menu. 
     setwd("~/covid-vaccines/CSVs")
     variants <- read.csv("covid-variants.csv")
     
@@ -97,9 +94,7 @@ function(input, output, session) {
     
     
     variants_popular <- variants_date %>%
-      filter(location == input$location)
-      #have this be an input for country
-      #filter(location == "Argentina") %>%
+      filter(location == input$location) %>%
       group_by(variant, year, month) %>%
       summarise(
         n = sum(num_sequences, na.rm = TRUE)
