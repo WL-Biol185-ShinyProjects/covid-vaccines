@@ -39,7 +39,7 @@ dashboardPage(skin = "blue",
       menuItem("Socioeconomics", tabName = "Socioeconomics", 
                icon = icon("th")),
       
-      menuItem("Continents", tabName = "Continents", 
+      menuItem("Population", tabName = "Population", 
                icon = icon("th"))
       # menuItem("CDC Vaccine Info", icon = icon("file-code-o"),
       #          href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html")
@@ -68,19 +68,119 @@ dashboardPage(skin = "blue",
                             ),
       
       tabItem(tabName = "Variants",
-              box(width = 12,
-                fluidRow(
-                  valueBoxOutput("CountryBox"),
-                   
-                  valueBoxOutput("VaccinatedBox"),
-                   
-                  valueBoxOutput("Predominant_VaccineBox")
-                ))
+                
+                box(width = 12, plotOutput("globalvariants")),
+                
+                selectInput(
+                  "location",
+                  "country",
+                  c("Angola",
+                     "Argentina",
+                     "Aruba",
+                     "Australia",
+                     "Austria",
+                     "Bahrain",
+                     "Bangladesh",
+                     "Belgium",
+                     "Botswana",
+                     "Brazil",
+                     "Bulgaria",
+                     "Cambodia",
+                     "Canada",
+                     "Chile",
+                     "China",
+                     "Colombia",
+                     "CostaRica",
+                     "Croatia",
+                     "Curacao",
+                     "Czechia",
+                     "Denmark",
+                     "Ecuador",
+                     "Estonia",
+                     "Finland",
+                     "France",
+                     "Gambia",
+                     "Germany",
+                     "Ghana",
+                     "Greece",
+                     "HongKong",
+                     "Hungary",
+                     "Iceland",
+                     "India",
+                     "Indonesia",
+                     "Iraq",
+                     "Ireland",
+                     "Israel",
+                     "Italy",
+                     "Jamaica",
+                     "Japan",
+                     "Jordan",
+                     "Kazakhstan",
+                     "Kenya",
+                     "Kuwait",
+                     "Latvia",
+                     "Lebanon",
+                     "Lithuania",
+                     "Luxembourg",
+                     "Malawi",
+                     "Malaysia",
+                     "Malta",
+                     "Mexico",
+                     "Mozambique",
+                     "Nepal",
+                     "Netherlands",
+                     "NewZealand",
+                     "Nigeria",
+                     "NorthMacedonia",
+                     "Norway",
+                     "Pakistan",
+                     "Peru",
+                     "Philippines",
+                     "Poland",
+                     "Portugal",
+                     "Qatar",
+                     "Romania",
+                     "Russia",
+                     "Rwanda",
+                     "Singapore",
+                     "SintMaarten(Dutchpart)",
+                     "Slovakia",
+                     "Slovenia",
+                     "SouthAfrica",
+                     "SouthKorea",
+                     "Spain",
+                     "SriLanka",
+                     "Suriname",
+                     "Sweden",
+                     "Switzerland",
+                     "Thailand",
+                     "TrinidadandTobago",
+                     "Turkey",
+                     "Uganda",
+                     "Ukraine",
+                     "UnitedKingdom",
+                     "UnitedStates",
+                     "Uruguay",
+                     "Zambia",
+                     "Zimbabwe")
+                  )
+                
               ),
       
-      tabItem(tabName = "Socioeconomics"),
+      tabItem(tabName = "Socioeconomics",
+              box(width = 12,
+                  fluidRow(
+                    valueBoxOutput("CountryBox"),
+                    
+                    valueBoxOutput("VaccinatedBox"),
+                    
+                    valueBoxOutput("Predominant_VaccineBox")
+                  ))),
       
-      tabItem(tabName = "Continents")
+      tabItem(tabName = "Population",
+              
+              box(width = 12, plotOutput("percapita"))
+              )
       
     ),
     
