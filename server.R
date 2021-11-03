@@ -120,7 +120,7 @@ function(input, output, session) {
       facet_wrap(~year) +
       coord_flip() +
       theme_classic() +
-      labs(title = "Covid-19 Variant Prevelance By Year", y = "Month", x = "Relevant Prevelance", fill = "Variant")
+      labs(title = "Covid-19 Variant Prevelance By Year", y = "Relevant Prevelance", x = "Month", fill = "Variant")
     
     
     
