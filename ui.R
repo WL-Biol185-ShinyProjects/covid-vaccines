@@ -40,9 +40,9 @@ dashboardPage(skin = "blue",
                icon = icon("th")),
       
       menuItem("Population", tabName = "Population", 
-               icon = icon("th"))
-      # menuItem("CDC Vaccine Info", icon = icon("file-code-o"),
-      #          href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html")
+               icon = icon("th")),
+      menuItem("CDC Vaccine Info", icon = icon("file-code-o"),
+                href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html")
     )
   ),
   
