@@ -11,3 +11,5 @@ hopkins <- hopkins %>%
 GDP_per_capita <- read.csv("~/covid-vaccines/CSVs/GDP_per_capita.csv")
 
 hopkins_GDP <- left_join(hopkins, GDP_per_capita, by = c("Country_Region" = "Country"))
+
+view(hopkins_GDP)
