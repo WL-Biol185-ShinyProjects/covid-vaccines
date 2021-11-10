@@ -1,15 +1,16 @@
-library(shiny)
-library(utils)
-library(tidyverse)
-library(threejs)
-library("maptools")
-library("maps")
-library("writexl") 
-library("lubridate")
+
 
 
 function(input, output) {
 
+  library(shiny)
+  library(utils)
+  library(tidyverse)
+  library(threejs)
+  library("maptools")
+  library("maps")
+  library("writexl") 
+  library("lubridate")
 
   output$summary <- renderText({
     summary(x())
@@ -155,7 +156,7 @@ function(input, output, session) {
   })
   
   output$heartbeat <- renderUI({
-    invalidateLater(40 * 1000, session)
+    invalidateLater(1000, session)
     p(Sys.time(),style = "visibility: hidden;")
   })
   
