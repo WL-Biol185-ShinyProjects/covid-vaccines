@@ -203,15 +203,22 @@ function(input, output, session) {
 
     pop_hopkins_fully <- pop_hopkins_fully %>%
       filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
-      filter(!(Country_Region=="US"))
+      filter(!(Country_Region=="US")) %>%
+      mutate(fully_per_capita = round(fully_per_capita, digits = 4)) %>%
+      mutate(fully_per_capita = fully_per_capita * 100)
 
     pop_hopkins_fully$fully_per_capita <- as.factor(pop_hopkins_fully$fully_per_capita)
 
 
     ggplot(data = pop_hopkins_fully, aes(x = fully_per_capita, y = Country_Region, fill = GDP.nominal.per.capita)) +
       geom_tile()+
+<<<<<<< HEAD
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
+=======
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      labs(title = "GDP and Vaccination Rates In the World", subtitle = "Top 10 and Bottom 10 GDP countries chosen", x = "Percent Fully Vaccinated Per Country", y = "Country", fill = "Nominal GDP Per Capita")
+>>>>>>> 8d0b1c86adfcbfc686e95b94caa0947861250ad2
   })
   
 }
