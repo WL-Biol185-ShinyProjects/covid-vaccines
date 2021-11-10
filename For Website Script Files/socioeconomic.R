@@ -15,9 +15,12 @@ GDP_per_capita <- read.csv("~/covid-vaccines/CSVs/GDP_per_capita.csv")
 hopkins_GDP <- left_join(hopkins, GDP_per_capita, by = c("Country_Region" = "Country")) %>%
   mutate(GDP.nominal.per.capita = gsub("$", "", GDP.nominal.per.capita, fixed = TRUE)) %>%
   mutate(GDP.nominal.per.capita = gsub(",", "", GDP.nominal.per.capita, fixed = TRUE)) %>% 
-  mutate(GDP.nominal.per.capita = as.numeric(GDP.nominal.per.capita))
+  mutate(GDP.nominal.per.capita = as.numeric(GDP.nominal.per.capita)) %>%
+  mutate(Population..2017 = gsub(","), "", Population..2017, fixed = TRUE) %>% 
+  mutate(Population..2017 = as.numeric(Population..2017))
 
 
+hopkins_GDP$vaccination_per_capita <- hopkins_GDP$People_fully_vaccinated / hopkins_GDP$Population..2017
 
 
 
