@@ -163,6 +163,8 @@ dashboardPage(skin = "blue",
       
       tabItem(tabName = "Socioeconomics",
               
+              box(width = 12, plotOutput("socioeconomicsbox")),
+              
                     p(strong("The data maniputlated on this page is intended to illustrate
                         disparities between vaccination rates across countries in different 
                         socioeconmic standings. We hope these

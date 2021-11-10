@@ -160,6 +160,18 @@ function(input, output, session) {
     p(Sys.time(),style = "visibility: hidden;")
   })
   
+  output$socioeconomicsbox <- renderPlot({
+    
+    pop_hopkins_fully <- pop_hopkins_fully %>%
+      filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
+      filter(!(Country_Region=="US"))
+    pop_hopkins_fully$fully_per_capita <- as.factor(pop_hopkins_fully$fully_per_capita)
+    options(digits = 5)
+    ggplot(data = pop_hopkins_fully, aes(fully_per_capita, Country_Region, fill = GDP.nominal.per.capita)) +
+      geom_tile()+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+  })
+  
 }
 
 
