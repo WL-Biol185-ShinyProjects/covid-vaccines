@@ -58,7 +58,7 @@ dashboardPage(skin = "blue",
               
                     box(width = 12, globeOutput("globe")
                         ),
-            p("your mother could never create a globe this dank")
+            p("The interactive globe above displays the relative number of vaccines distributed to each country specific to a vaccine manufacturers.  Use the interactive drop-down menu to explore different globes for the vaccine manufacturers of interest. The spike location on the globe rests at the capital of the country. Countries with no spikes indicate missing data, not zero vaccines distributed.  ")
                             ),
       
       tabItem(tabName = "Variants",
