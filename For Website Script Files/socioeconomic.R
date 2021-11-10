@@ -28,11 +28,7 @@ hopkins_GDP <- hopkins_GDP %>%
   filter(Date == "2021-10-25") %>%
   filter(!is.na(People_fully_vaccinated))
 
-library(ggplot2)
-library(tidyr)
-library(tibble)
-library(hrbrthemes)
-library(dipylr)
+
 
 
 
