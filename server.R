@@ -1,15 +1,16 @@
-library(shiny)
-library(utils)
-library(tidyverse)
-library(threejs)
-library("maptools")
-library("maps")
-library("writexl") 
-library("lubridate")
+
 
 
 function(input, output) {
 
+  library(shiny)
+  library(utils)
+  library(tidyverse)
+  library(threejs)
+  library("maptools")
+  library("maps")
+  library("writexl") 
+  library("lubridate")
 
   output$summary <- renderText({
     summary(x())

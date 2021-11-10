@@ -22,6 +22,10 @@ hopkins_GDP <- left_join(hopkins, GDP_per_capita, by = c("Country_Region" = "Cou
 hopkins_GDP$partial_fully <- hopkins_GDP$People_partially_vaccinated +
   hopkins_GDP$People_fully_vaccinated
 
+hopkins_GDP <- hopkins_GDP %>%
+  filter(Date == "2021-10-25") %>%
+  filter(!is.na(People_fully_vaccinated))
+
 library(ggplot2)
 library(tidyr)
 library(tibble)
@@ -29,17 +33,31 @@ library(hrbrthemes)
 library(dipylr)
 
 
-hopkins_GDP$GDP.nominal.per.capita <- as.numeric(hopkins_GDP$GDP.nominal.per.capita)            
-hopkins_GDP$partial_fully <- as.numeric(hopkins_GDP$partial_fully)
-hopkins_GDP$Country_Region <- as.factor(hopkins_GDP$Country_Region)
-hopkins_GDP$People_fully_vaccinated <- as.factor(hopkins_GDP$People_fully_vaccinated)
-hopkins_highlow <- hopkins_GDP %>%
-  filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
-  filter(!(Country_Region=="US"))
-  
 
-ggplot(data = hopkins_highlow, aes(People_fully_vaccinated, Country_Region, fill = GDP.nominal.per.capita)) +
-  geom_tile()
+
+country_pop <- read.csv("population_by_country_2020.csv") %>%
+  mutate(Country..or.dependency. = as.character(Country..or.dependency.)) %>%
+  mutate(pop = Population..2020.)
+
+country_pop$Country..or.dependency.[3] <- "US"
+
+pop_hopkins_fully <- left_join(hopkins_GDP, country_pop, by = c("Country_Region" = "Country..or.dependency.")) %>%
+  mutate(fully_per_capita = People_fully_vaccinated / Population..2020.) %>%
+  mutate(World.Share = gsub("%", "", World.Share, fixed = TRUE)) %>%
+  mutate(World.Share = as.numeric(World.Share))
+
+#pop_hopkins_fully$GDP.nominal.per.capita <- as.numeric(pop_hopkins_fully$GDP.nominal.per.capita)            
+#pop_hopkins_fully$partial_fully <- as.numeric(pop_hopkins_fully$partial_fully)
+#pop_hopkins_fully$Country_Region <- as.factor(pop_hopkins_fully$Country_Region)
+#pop_hopkins_fully$People_fully_vaccinated <- as.factor(pop_hopkins_fully$People_fully_vaccinated)
+pop_hopkins_fully <- pop_hopkins_fully %>%
+    filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
+    filter(!(Country_Region=="US"))
+pop_hopkins_fully$fully_per_capita <- as.factor(pop_hopkins_fully$fully_per_capita)
+options(digits = 5)
+ggplot(data = pop_hopkins_fully, aes(fully_per_capita, Country_Region, fill = GDP.nominal.per.capita)) +
+  geom_tile()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
   
 
 
