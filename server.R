@@ -1,16 +1,19 @@
-
+library(shiny)
+library(utils)
+library(tidyverse)
+library(threejs)
+library(maptools)
+library(maps)
+library(writexl) 
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+library(tibble)
+library(hrbrthemes)
+library(dplyr)
 
 
 function(input, output) {
-
-  library(shiny)
-  library(utils)
-  library(tidyverse)
-  library(threejs)
-  library("maptools")
-  library("maps")
-  library("writexl") 
-  library("lubridate")
 
   output$summary <- renderText({
     summary(x())
@@ -161,7 +164,7 @@ function(input, output, session) {
   })
   
   output$socioeconomicsbox <- renderPlot({
-    
+
     pop_hopkins_fully <- pop_hopkins_fully %>%
       filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
       filter(!(Country_Region=="US"))
@@ -170,6 +173,7 @@ function(input, output, session) {
     ggplot(data = pop_hopkins_fully, aes(fully_per_capita, Country_Region, fill = GDP.nominal.per.capita)) +
       geom_tile()+
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
   })
   
 }
