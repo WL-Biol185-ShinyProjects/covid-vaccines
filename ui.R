@@ -21,7 +21,9 @@ dashboardPage(skin = "blue",
     a(href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html"),  
  
     sidebarMenu(
-    
+      
+      menuItem("Home", tabName = "Home",
+               icon = icon("home", lib = "glyphicon")),
       
       menuItem("Global", tabName = "Global", 
                icon = icon("globe", lib = "glyphicon")),
@@ -44,8 +46,15 @@ dashboardPage(skin = "blue",
     
     tabItems(
       
+      tabItem(tabName = "Home",
+              
+              p("THIS IS THE HOME PAGE!")),
+      
       tabItem(tabName = "Global",
               
+            p("The interactive globe above displays the relative number of vaccines distributed to each country specific to a vaccine manufacturers.  Use the interactive drop-down menu to explore different globes for the vaccine manufacturers of interest. The spike location on the globe rests at the capital of the country. 
+              Countries with no spikes indicate missing data, not zero vaccines distributed."),
+  
             selectInput(
                 "vaccine",
                 "Manufacturer:",
@@ -57,9 +66,7 @@ dashboardPage(skin = "blue",
               ),
               
                     box(width = 12, globeOutput("globe")
-                        ),
-            p("The interactive globe above displays the relative number of vaccines distributed to each country specific to a vaccine manufacturers.  Use the interactive drop-down menu to explore different globes for the vaccine manufacturers of interest. The spike location on the globe rests at the capital of the country. Countries with no spikes indicate missing data, not zero vaccines distributed.  ")
-                            ),
+                        )),
       
       tabItem(tabName = "Variants",
                 
@@ -163,12 +170,12 @@ dashboardPage(skin = "blue",
       
       tabItem(tabName = "Socioeconomics",
               
-              box(width = 12, plotOutput("socioeconomicsbox")),
-              
-                    p(strong("The data maniputlated on this page is intended to illustrate
+              p(strong("The data maniputlated on this page is intended to illustrate
                         disparities between vaccination rates across countries in different 
                         socioeconmic standings. We hope these
                         graphical displays accuratly display this global issue.")),
+              
+              box(width = 12, plotOutput("socioeconomicsbox")),
               
               box(width = 12,
                   fluidRow(

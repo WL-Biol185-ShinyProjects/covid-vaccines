@@ -212,13 +212,9 @@ function(input, output, session) {
 
     ggplot(data = pop_hopkins_fully, aes(x = fully_per_capita, y = Country_Region, fill = GDP.nominal.per.capita)) +
       geom_tile()+
-<<<<<<< HEAD
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-
-=======
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       labs(title = "GDP and Vaccination Rates In the World", subtitle = "Top 10 and Bottom 10 GDP countries chosen", x = "Percent Fully Vaccinated Per Country", y = "Country", fill = "Nominal GDP Per Capita")
->>>>>>> 8d0b1c86adfcbfc686e95b94caa0947861250ad2
+
   })
   
 }
