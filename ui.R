@@ -36,6 +36,7 @@ dashboardPage(skin = "blue",
       
       menuItem("Population", tabName = "Population", 
                icon = icon("th")),
+      
       menuItem("CDC Vaccine Info", icon = icon("file-code-o"),
                 href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html")
     )
@@ -179,8 +180,35 @@ dashboardPage(skin = "blue",
               
               box(width = 12, plotOutput("socioeconomicsbox")),
               
+              box(width = 4,
+                  selectInput(
+                    "Country",
+                    "Country:",
+                    c("Uganda" = "Uganda",
+                      "Togo" = "Togo",
+                      "Switzerland" = "Switzerland",
+                      "Sweden" = "Sweden",
+                      "Singapore" = "Singapore",
+                      "Sierra Leone" = "Sierra Leone",
+                      "Rwanda" = "Rwanda",
+                      "Qatar" = "Qatar",
+                      "Norway" = "Norway",
+                      "Mozambique" = "Mozambique",
+                      "Mali" = "Mali",
+                      "Malawi" = "Malawi",
+                      "Luxembourg" = "Luxembourg",
+                      "Ireland" = "Ireland",
+                      "Iceland" = "Iceland",
+                      "Gambia" = "Gambia",
+                      "Ethiopia" = "Ethiopia",
+                      "Denmark" = "Denmark",
+                      "Afghanistan" = "Afghanistan")
+                    
+                  )),
+              
               box(width = 12,
                   fluidRow(
+                    
                     valueBoxOutput("CountryBox"),
                     
                     valueBoxOutput("VaccinatedBox"),
