@@ -32,7 +32,7 @@ library(ggplot2)
 library(tidyr)
 library(tibble)
 library(hrbrthemes)
-library(dipylr)
+library(dplyr)
 
 
 
