@@ -9,7 +9,6 @@ library(lubridate)
 library(ggplot2)
 library(tidyr)
 library(tibble)
-library(hrbrthemes)
 library(dplyr)
 
 
