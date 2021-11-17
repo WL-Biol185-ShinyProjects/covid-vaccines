@@ -218,6 +218,8 @@ dashboardPage(skin = "blue",
       
       tabItem(tabName = "Population",
               
+              box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
+              
               box(width = 12, plotOutput("percapita"))
               )
       
