@@ -64,5 +64,5 @@ ggplot(data = pop_hopkins_fully, aes(fully_per_capita, Country_Region, fill = GD
 
 hopkins_GDP$vaccination_per_capita <- hopkins_GDP$People_fully_vaccinated / hopkins_GDP$Population..2017
 
-
+View(hopkins_GDP)
 
