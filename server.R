@@ -138,8 +138,7 @@ function(input, output, session) {
     time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
     hopkins <- time_series_covid19_vaccine_global %>%
       filter(Date == "2021-10-25") 
-      
-    
+  
     HopkinsVAX <- hopkins %>%
       filter(Country_Region == input$Country) %>%
       filter(!(is.na(People_fully_vaccinated)))
@@ -149,13 +148,24 @@ function(input, output, session) {
     valueBox(
       paste0(value, " Individuals"), "Fully Vaccinated", 
       icon = icon("heart", lib = "glyphicon"),
-      color = "light-blue"
-    )
+      color = "light-blue")
+    
   })
   
   output$Predominant_VaccineBox <- renderValueBox({
+    
+    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    hopkins <- time_series_covid19_vaccine_global %>%
+      filter(Date == "2021-10-25") 
+    
+    HopkinsVAX <- hopkins %>%
+      filter(Country_Region == input$Country) %>%
+      filter(!(is.na(People_partially_vaccinated)))
+    value <- HopkinsVAX[1,5]
+    print("Hello")
+    print(value)
     valueBox(
-      paste0(input$`GDP (nominal, 2017)`, "GDP"), "Per Capita", 
+      paste0(value, "People"), "Partially Vaccinated",
       icon = icon("briefcase", lib = "glyphicon"),
       color = "blue",
     )
