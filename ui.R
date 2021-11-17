@@ -32,10 +32,10 @@ dashboardPage(skin = "blue",
                icon = icon("random", lib = "glyphicon")),
       
       menuItem("Socioeconomics", tabName = "Socioeconomics", 
-               icon = icon("th")),
+               icon = icon("usd")),
       
       menuItem("Population", tabName = "Population", 
-               icon = icon("th")),
+               icon = icon("user")),
       
       menuItem("CDC Vaccine Info", icon = icon("file-code-o"),
                 href = "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/index.html")
