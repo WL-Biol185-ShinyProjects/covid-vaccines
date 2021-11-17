@@ -2,7 +2,7 @@ library(shiny)
 library(shinydashboard)
 
 
-dashboardPage(skin = "blue",
+dashboardPage(skin = "green",
               
               
   
