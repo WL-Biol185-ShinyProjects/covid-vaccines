@@ -1,16 +1,18 @@
-
+library(shiny)
+library(utils)
+library(tidyverse)
+library(threejs)
+library(maptools)
+library(maps)
+library(writexl) 
+library(lubridate)
+library(ggplot2)
+library(tidyr)
+library(tibble)
+library(dplyr)
 
 
 function(input, output) {
-
-  library(shiny)
-  library(utils)
-  library(tidyverse)
-  library(threejs)
-  library("maptools")
-  library("maps")
-  library("writexl") 
-  library("lubridate")
 
   output$summary <- renderText({
     summary(x())
@@ -132,8 +134,20 @@ function(input, output, session) {
   })
   
   output$VaccinatedBox <- renderValueBox({
+    
+    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    hopkins <- time_series_covid19_vaccine_global %>%
+      filter(Date == "2021-10-25") 
+      
+    
+    HopkinsVAX <- hopkins %>%
+      filter(Country_Region == input$Country) %>%
+      filter(!(is.na(People_fully_vaccinated)))
+    value <- HopkinsVAX[1,5]
+    print("Hello")
+    print(value)
     valueBox(
-      paste0(1 + input$count, "Percentage"), "Vaccinated", 
+      paste0(value, " Individuals"), "Fully Vaccinated", 
       icon = icon("heart", lib = "glyphicon"),
       color = "light-blue"
     )
@@ -141,7 +155,7 @@ function(input, output, session) {
   
   output$Predominant_VaccineBox <- renderValueBox({
     valueBox(
-      paste0(1 + input$count, "Type"), "Predominant Vaccine", 
+      paste0(input$`GDP (nominal, 2017)`, "GDP"), "Per Capita", 
       icon = icon("briefcase", lib = "glyphicon"),
       color = "blue",
     )
@@ -158,6 +172,60 @@ function(input, output, session) {
   output$heartbeat <- renderUI({
     invalidateLater(1000, session)
     p(Sys.time(),style = "visibility: hidden;")
+  })
+  
+  output$socioeconomicsbox <- renderPlot({
+
+    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    hopkins <- time_series_covid19_vaccine_global
+    GDP_per_capita <- read.csv("~/covid-vaccines/CSVs/GDP_per_capita.csv")
+
+    hopkins <- hopkins %>%
+      filter(Date == "2021-10-25") %>%
+      filter(!is.na(People_fully_vaccinated)) %>%
+      filter(Country_Region != "US (Aggregate)") %>%
+      filter(Country_Region != "World")
+
+    hopkins_GDP <- left_join(hopkins, GDP_per_capita, by = c("Country_Region" = "Country"))
+
+    hopkins_GDP <- hopkins_GDP %>%
+      mutate(GDP.nominal.per.capita = gsub("$", "", GDP.nominal.per.capita, fixed = TRUE)) %>%
+      mutate(GDP.nominal.per.capita = gsub(",", "", GDP.nominal.per.capita, fixed = TRUE)) %>%
+      mutate(GDP.nominal.per.capita = as.numeric(GDP.nominal.per.capita)) %>%
+      mutate(Population..2017 = gsub(",", "", Population..2017, fixed = TRUE)) %>%
+      mutate(Population..2017 = as.numeric(Population..2017))
+
+    hopkins_GDP$partial_fully <- hopkins_GDP$People_partially_vaccinated + hopkins_GDP$People_fully_vaccinated
+
+    hopkins_GDP <- hopkins_GDP %>%
+      filter(Date == "2021-10-25") %>%
+      filter(!is.na(People_fully_vaccinated))
+    
+    country_pop <- read.csv("population_by_country_2020.csv") %>%
+      mutate(Country..or.dependency. = as.character(Country..or.dependency.)) %>%
+      mutate(pop = Population..2020.)
+
+    country_pop$Country..or.dependency.[3] <- "US"
+
+    pop_hopkins_fully <- left_join(hopkins_GDP, country_pop, by = c("Country_Region" = "Country..or.dependency.")) %>%
+      mutate(fully_per_capita = People_fully_vaccinated / Population..2020.) %>%
+      mutate(World.Share = gsub("%", "", World.Share, fixed = TRUE)) %>%
+      mutate(World.Share = as.numeric(World.Share))
+
+    pop_hopkins_fully <- pop_hopkins_fully %>%
+      filter(GDP.nominal.per.capita >= 54000 | GDP.nominal.per.capita <= 850) %>%
+      filter(!(Country_Region=="US")) %>%
+      mutate(fully_per_capita = round(fully_per_capita, digits = 4)) %>%
+      mutate(fully_per_capita = fully_per_capita * 100)
+
+    pop_hopkins_fully$fully_per_capita <- as.factor(pop_hopkins_fully$fully_per_capita)
+
+
+    ggplot(data = pop_hopkins_fully, aes(x = fully_per_capita, y = Country_Region, fill = GDP.nominal.per.capita)) +
+      geom_tile()+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      labs(title = "GDP and Vaccination Rates In the World", subtitle = "Top 10 and Bottom 10 GDP countries chosen", x = "Percent Fully Vaccinated Per Country", y = "Country", fill = "Nominal GDP Per Capita")
+
   })
   
 }

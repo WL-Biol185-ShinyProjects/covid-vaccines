@@ -2,7 +2,7 @@ library(tidyverse)
 library(leaflet)
 library(rgdal)
 library(dplyr)
-library(RColorBrewer)
+library(RColorBrewer) 
 
 
 #objective: make a heatmap using leaflet that shows the percent of people fully (and partially) vaccinated in each country. Make an interactive feature in shiny with a drop down menu where users can choose fully or partially vaccinated 
@@ -82,22 +82,22 @@ leaflet(world_geo) %>%
   addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) 
 
 
-leaflet(world_geo) %>% 
-  addTiles()  %>% 
-  setView( lat=10, lng=0 , zoom=2) %>%
-  addPolygons(
-    popup = full_popup,
-    fillColor = ~mypalette(world_geo$People_fully), 
-    stroke=TRUE, 
-    fillOpacity = 0.9, 
-    color="white",
-    weight=0.3,
-    labelOptions = labelOptions( 
-      style = list("font-weight" = "normal", padding = "3px 8px"), 
-      textsize = "13px", 
-      direction = "auto"
-    )
-  ) %>%
-  addLegend( pal=mypalette, values=~People_fully, opacity=0.9, title = "Percent fully vaccinated by country", position = "bottomleft" ) 
+# leaflet(world_geo) %>% 
+#   addTiles()  %>% 
+#   setView( lat=10, lng=0 , zoom=2) %>%
+#   addPolygons(
+#     popup = full_popup,
+#     fillColor = ~mypalette(world_geo$People_fully), 
+#     stroke=TRUE, 
+#     fillOpacity = 0.9, 
+#     color="white",
+#     weight=0.3,
+#     labelOptions = labelOptions( 
+#       style = list("font-weight" = "normal", padding = "3px 8px"), 
+#       textsize = "13px", 
+#       direction = "auto"
+#     )
+#   ) %>%
+#   addLegend( pal=mypalette, values=~People_fully, opacity=0.9, title = "Percent fully vaccinated by country", position = "bottomleft" ) 
 
 

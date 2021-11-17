@@ -35,8 +35,6 @@ library(hrbrthemes)
 library(dplyr)
 
 
-
-
 country_pop <- read.csv("population_by_country_2020.csv") %>%
   mutate(Country..or.dependency. = as.character(Country..or.dependency.)) %>%
   mutate(pop = Population..2020.)
@@ -61,10 +59,6 @@ ggplot(data = pop_hopkins_fully, aes(fully_per_capita, Country_Region, fill = GD
   geom_tile()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
   
-
-
-
-
 
 hopkins_GDP$vaccination_per_capita <- hopkins_GDP$People_fully_vaccinated / hopkins_GDP$Population..2017
 
