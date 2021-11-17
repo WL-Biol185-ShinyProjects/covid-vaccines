@@ -21,74 +21,58 @@ hopkins <- hopkins %>%
 #load population data
 population_by_country <- read.csv("~/covid-vaccines/CSVs/population_by_country_2020.csv")
 
+#fix country names to make them match hopkins
+hopkins$Country_Region[154] <- "United States"
+hopkins$Country_Region[143] <- "Taiwan"
+
+
 #join vaccine and population data
 hopkins_pop <- left_join(hopkins, population_by_country, by = c("Country_Region" = "Country..or.dependency.")) 
 
 #create new columns for percent of people partially and fully vaccinated
 hopkins_pop$percent_partial <- (hopkins_pop$People_partially_vaccinated / hopkins_pop$Population..2020.)*100
-hopkins_pop$People_fully <- (hopkins_pop$People_fully_vaccinated / hopkins_pop$Population..2020.)*100 
+hopkins_pop$percent_fully <- (hopkins_pop$People_fully_vaccinated / hopkins_pop$Population..2020.)*100 
 
-#rename hopkins_pop to make the country names match world_geo 
-hopkins_pop$Country_Region[37] <- "Czech Republic"
-
-#upload spatial data for choropleth 
-#from https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet.html 
-
-# download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" ,
-#               destfile="~/covid-vaccines/data/world_shape_file.zip")
-# system("unzip ~/covid-vaccines/data/world_shape_file.zip")
-
-#create a spatial polygon dataframe
-# world_spdf <- readOGR( 
-#   dsn= paste0(getwd(),"/DATA/world_shape_file/") , 
-#   layer="TM_WORLD_BORDERS_SIMPL-0.3",
-#   verbose=FALSE
-# )
+#rename columns to make the country names match 
+#hopkins_pop$Country_Region[37] <- "Czech Republic"
 
 world_geo <- readOGR("/home/gregg/countries.geo.json")
-world_geo_vax <- read.csv("~/covid-vaccines/CSVs/world_geo_vax.csv")
+world_geo_vax <- read.csv("~/covid-vaccines/CSVs/world_geo_vax1.csv") 
+
 
 world_geo@data <- left_join(world_geo@data, world_geo_vax, by = "name", "name")
 
 #make the map 
-mybins <- c(0,10,20,30,40,50,60,70,80,90,100)
+mybins <- c(0,15,30,45,60,75,90,100)
 mypalette <- colorBin( palette="YlOrBr", domain=world_geo@data, na.color="transparent", bins=mybins)
 
-partially_vaxxed <- leaflet(world_geo) %>% 
+#fix precision 
+world_geo$percent_partial <- round(world_geo$percent_partial, digits = 2)
+world_geo$People_fully <- round(world_geo$People_fully, digits = 2)
+partial_popup <- paste0("<strong>Country: </strong>", 
+                        world_geo$name,
+                        "<br><strong>Partially Vaccinated: </strong>", 
+                      world_geo$People_partially_vaccinated, 
+                      "<br><strong>Percent of Population Partially Vaccinated </strong>", 
+                      world_geo$percent_partial)
+full_popup <- paste0("<strong>Country: </strong>", 
+                        world_geo$name,
+                     "<br><strong>Fully Vaccinated: </strong>", 
+                        world_geo$People_fully_vaccinated, 
+                        "<br><strong>Percent of Population Fully Vaccinated </strong>",
+                     world_geo$People_fully)
+
+#make the maps!
+leaflet(world_geo) %>% 
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=2) %>%
   addPolygons( 
-    fillColor = ~mypalette(hopkins_pop$percent_partial), 
+    popup = partial_popup,
+    fillColor = ~mypalette(world_geo$percent_partial), 
     stroke=TRUE, 
     fillOpacity = 0.9, 
     color="white",
-    #color = ~colorQuantile("YlOrRd", world_geo)(world_geo) )
     weight=0.3,
-    #label = mytext,
-    labelOptions = labelOptions( 
-      style = list("font-weight" = "normal", padding = "3px 8px"), 
-      textsize = "13px", 
-      direction = "auto"
-    )
-  ) %>%
-  addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) %>%
-  addPopups(world_geo ,#how to call on country polygon? ,
-            world_geo$percent_partial,
-            options = popupOptions(closeButton = FALSE)
-  )
-
-
-fully_vaxxed <- leaflet(world_geo) %>% 
-  addTiles()  %>% 
-  setView( lat=10, lng=0 , zoom=2) %>%
-  addPolygons( 
-    fillColor = ~mypalette(hopkins_pop$percent_partial), 
-    stroke=TRUE, 
-    fillOpacity = 0.9, 
-    color="white",
-    #color = ~colorQuantile("YlOrRd", world_geo)(world_geo) )
-    weight=0.3,
-    #label = mytext,
     labelOptions = labelOptions( 
       style = list("font-weight" = "normal", padding = "3px 8px"), 
       textsize = "13px", 
@@ -98,7 +82,22 @@ fully_vaxxed <- leaflet(world_geo) %>%
   addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) 
 
 
-#need to add popup labels and repeat for fully vaxxed 
-#need to incorporate into server and add dropdown menu into ui 
+leaflet(world_geo) %>% 
+  addTiles()  %>% 
+  setView( lat=10, lng=0 , zoom=2) %>%
+  addPolygons(
+    popup = full_popup,
+    fillColor = ~mypalette(world_geo$People_fully), 
+    stroke=TRUE, 
+    fillOpacity = 0.9, 
+    color="white",
+    weight=0.3,
+    labelOptions = labelOptions( 
+      style = list("font-weight" = "normal", padding = "3px 8px"), 
+      textsize = "13px", 
+      direction = "auto"
+    )
+  ) %>%
+  addLegend( pal=mypalette, values=~People_fully, opacity=0.9, title = "Percent fully vaccinated by country", position = "bottomleft" ) 
 
 
