@@ -150,7 +150,7 @@ function(input, output, session) {
     valueBox(
       paste0(value), "Individuals Fully Vaccinated", 
       icon = icon("heart", lib = "glyphicon"),
-      color = "light-blue")
+      color = "green")
     
   })
   
@@ -166,15 +166,25 @@ function(input, output, session) {
     valueBox(
       paste0(value), "GDP Per Capita",
       icon = icon("briefcase", lib = "glyphicon"),
-      color = "blue",
+      color = "teal",
     )
   })
   
   output$CountryBox <- renderValueBox({
+    
+    pop_hop_fully <- read.csv("GDP_population_vaccine.csv")
+    pop_hop_fully <- pop_hop_fully %>%
+      filter(Country_Region == input$Country) %>%
+      filter(!(is.na(People_partially_vaccinated)))
+    
+    
+    
+    value <- pop_hop_fully[1,1]
+    
     valueBox(
-      paste0(1 + input$count, "country"), "Country", 
+      paste0(value), "Selected Country", 
       icon = icon("search", lib = "glyphicon"),
-      color = "aqua",
+      color = "olive",
     )
   })
   
