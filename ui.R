@@ -3,7 +3,6 @@ library(shinydashboard)
 
 
 dashboardPage(skin = "green",
-              #comment 
               
               
   
@@ -220,6 +219,8 @@ dashboardPage(skin = "green",
       tabItem(tabName = "Population",
               
               box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
+              
+              box(width = 12, leafletOutput("PartiallyVaccinatedHeatmap")),
               
               box(width = 12, plotOutput("percapita"))
               )
