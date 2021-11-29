@@ -51,8 +51,8 @@ dashboardPage(skin = "green",
               
       
               h1("Covid-19 Vaccines and Variants", align = "center"),
-              h2("Informational WebPage By:", align = "center"),
-              h3("Katie Kern, Jack Donahue, Emma Aldrige", align = "center"),
+              h2("Katie Kern, Jack Donahue, Emma Aldrige", align = "center"),
+             
               
               #insert fluid row here 
               img(src = "covid-info.png", height = 800, width = 500, style = "display: block; margin-left; auto; margin-right: auto;")),
