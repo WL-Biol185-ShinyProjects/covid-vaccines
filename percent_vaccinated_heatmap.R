@@ -81,20 +81,20 @@ leaflet(world_geo) %>%
   ) %>%
   addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) 
 
-# leaflet(world_geo) %>% 
-#   addTiles()  %>% 
-#   setView( lat=10, lng=0 , zoom=2) %>%
-#   addPolygons( 
-#     popup = partial_popup,
-#     fillColor = ~mypalette(world_geo$percent_partial), 
-#     stroke=TRUE, 
-#     fillOpacity = 0.9, 
-#     color="white",
-#     weight=0.3,
-#     labelOptions = labelOptions( 
-#       style = list("font-weight" = "normal", padding = "3px 8px"), 
-#       textsize = "13px", 
-#       direction = "auto"
-#     )
-#   ) %>%
-#   addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) 
+leaflet(world_geo) %>%
+  addTiles()  %>%
+  setView( lat=10, lng=0 , zoom=2) %>%
+  addPolygons(
+    popup = partial_popup,
+    fillColor = ~mypalette(world_geo$percent_partial),
+    stroke=TRUE,
+    fillOpacity = 0.9,
+    color="white",
+    weight=0.3,
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "13px",
+      direction = "auto"
+    )
+  ) %>%
+  addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" )
