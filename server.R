@@ -150,7 +150,7 @@ function(input, output, session) {
     valueBox(
       paste0(value), "Individuals Fully Vaccinated", 
       icon = icon("heart", lib = "glyphicon"),
-      color = "light-blue")
+      color = "green")
     
   })
   
@@ -166,15 +166,25 @@ function(input, output, session) {
     valueBox(
       paste0(value), "GDP Per Capita",
       icon = icon("briefcase", lib = "glyphicon"),
-      color = "blue",
+      color = "teal",
     )
   })
   
   output$CountryBox <- renderValueBox({
+    
+    pop_hop_fully <- read.csv("GDP_population_vaccine.csv")
+    pop_hop_fully <- pop_hop_fully %>%
+      filter(Country_Region == input$Country) %>%
+      filter(!(is.na(People_partially_vaccinated)))
+    
+    
+    
+    value <- pop_hop_fully[1,1]
+    
     valueBox(
-      paste0(1 + input$count, "country"), "Country", 
+      paste0(value), "Selected Country", 
       icon = icon("search", lib = "glyphicon"),
-      color = "aqua",
+      color = "olive",
     )
   })
   
@@ -285,27 +295,32 @@ function(input, output, session) {
                          "<br><strong>Percent of Population Fully Vaccinated </strong>",
                          world_geo$People_fully)
     
-  
-    leaflet(world_geo) %>% 
-      addTiles()  %>% 
+    leaflet(world_geo) %>%
+      addTiles()  %>%
       setView( lat=10, lng=0 , zoom=2) %>%
-      addPolygons( 
-        popup = partial_popup,
-        fillColor = ~mypalette(world_geo$percent_partial), 
-        stroke=TRUE, 
-        fillOpacity = 0.9, 
+      addPolygons(
+        popup = full_popup,
+        fillColor = ~mypalette(world_geo$People_fully),
+        stroke=TRUE,
+        fillOpacity = 0.9,
         color="white",
         weight=0.3,
-        labelOptions = labelOptions( 
-          style = list("font-weight" = "normal", padding = "3px 8px"), 
-          textsize = "13px", 
+        labelOptions = labelOptions(
+          style = list("font-weight" = "normal", padding = "3px 8px"),
+          textsize = "13px",
           direction = "auto"
         )
       ) %>%
-      addLegend( pal=mypalette, values=~percent_partial, opacity=0.9, title = "Percent partially vaccinated by country", position = "bottomleft" ) 
+      addLegend( pal=mypalette, values=~People_fully, opacity=0.9, title = "Percent fully vaccinated by country", position = "bottomleft" )
+    
+    
+    
+
     
   })
   
 }
 
+
+#comment 
 
