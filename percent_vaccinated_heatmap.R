@@ -37,6 +37,7 @@ hopkins_pop$percent_fully <- (hopkins_pop$People_fully_vaccinated / hopkins_pop$
 #hopkins_pop$Country_Region[37] <- "Czech Republic"
 
 world_geo <- readOGR("/home/gregg/countries.geo.json")
+#world_geo_vax1.csv is a joined version of hopkins_pop and world_geo
 world_geo_vax <- read.csv("~/covid-vaccines/CSVs/world_geo_vax1.csv") 
 
 
