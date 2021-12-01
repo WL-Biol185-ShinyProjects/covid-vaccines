@@ -52,8 +52,9 @@ dashboardPage(skin = "green",
       tabItem(tabName = "Home",
               
       
-              h1("Covid-19 Vaccines and Variants", align = "center"),
-              h2("Katie Kern, Jack Donahue, Emma Aldrige", align = "center"),
+             box(width = 4, align = "center", size = 30,
+                 p("Covid-19 Vaccines and Variants, By: Katie Kern, Jack Donahue, Emma Aldrich")),
+            
              
               
               #insert fluid row here 
@@ -62,8 +63,15 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Global",
               
-            p(strong("|The interactive globe above displays the relative number of vaccines distributed to each country specific to a vaccine manufacturers.  Use the interactive drop-down menu to explore different globes for the vaccine manufacturers of interest. The spike location on the globe rests at the capital of the country. 
-              Countries with no spikes indicate missing data, not zero vaccines distributed|")),
+          
+             box(width = 12,
+              p("The interactive globe above displays the relative number of vaccines 
+              distributed to each country specific to a vaccine manufacturers.  
+              Use the interactive drop-down menu to explore different globes for the vaccine 
+              manufacturers of interest. The spike location on the globe rests at the capital 
+              of the country. 
+              Countries with no spikes indicate missing data, not zero vaccines distributed")),
+           
   
             selectInput(
                 "vaccine",
@@ -79,6 +87,17 @@ dashboardPage(skin = "green",
                         )),
       
       tabItem(tabName = "Variants",
+              
+                box(width = 12, 
+                p("As the pandemic continues to evolve, different 
+                                   variants of COVID-19 have emerged. The graph above 
+                                   shows the timeline of when these specific variants emerged 
+                                   in the country of choice. Use the interactive drop-down menu in 
+                                   order to compare the differences inwhen variants emerged in 
+                                   countries over 2020 to 2021 timeline. 
+                                   As you explore, please note
+                                   the Delta variant of COVID-19 is the most recent prolific variant and 
+                                   the data is as of October 25th, 2021" )),
                 
                 box(width = 12, plotOutput("globalvariants")),
                 
@@ -180,7 +199,8 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Socioeconomics",
               
-              p(strong("The data maniputlated on this page is intended to illustrate
+              box(width = 12,
+              p("The data maniputlated on this page is intended to illustrate
                         disparities between vaccination rates across countries in different 
                         socioeconmic standings. We hope these
                         graphical displays accuratly display this global issue.")),
@@ -225,9 +245,33 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Population",
               
+              box(width = 12,
+                  p("The below panels show an interactive map of the percent of 
+                    people fully vaccinated and percent partially vaccinated across 
+                    the globe. Note that partially vaccinated individuals include fully 
+                    vaccinated individuals. Click on each country to view its statistics")),
+              
               box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
               
+              box(width = 12, 
+                  p("The graph below shows the top 10 countries with the highest 
+                    number of fully vaccinated individuals in the world. More specifically, 
+                    the bars for each country show the rate of fully vaccinated individuals 
+                    per capita. The color of the bar indicates how much of the world population 
+                    that individual country contributes. The population data for each country 
+                    comes from a 2020 population dataset")),
+              
               box(width = 12, leafletOutput("PartiallyVaccinatedHeatmap")),
+              
+              box(width = 12, 
+                  p("Creator Analysis: As the creators of this visualization, 
+                    we found it extremely interesting that even though China and 
+                    India equivalent and large portions of the world populations, 
+                    they are at polar opposite sides of vaccine distributions per capita, 
+                    with China recording the highest vaccine distributed per capita and India 
+                    reporting the lowest. This leads to global questions such as accuracy in 
+                    reporting data, access to life saving vaccines, and other barriers that may 
+                    distinguish these countries")),
               
               box(width = 12, plotOutput("percapita"))
               )
