@@ -253,18 +253,15 @@ dashboardPage(skin = "green",
               
               box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
               
+              box(width = 12, leafletOutput("PartiallyVaccinatedHeatmap")),
+              
               box(width = 12, 
                   p("The graph below shows the top 10 countries with the highest 
                     number of fully vaccinated individuals in the world. More specifically, 
                     the bars for each country show the rate of fully vaccinated individuals 
                     per capita. The color of the bar indicates how much of the world population 
                     that individual country contributes. The population data for each country 
-                    comes from a 2020 population dataset")),
-              
-              box(width = 12, leafletOutput("PartiallyVaccinatedHeatmap")),
-              
-              box(width = 12, 
-                  p("Creator Analysis: As the creators of this visualization, 
+                    comes from a 2020 population dataset.                       Creator Analysis: As the creators of this visualization, 
                     we found it extremely interesting that even though China and 
                     India equivalent and large portions of the world populations, 
                     they are at polar opposite sides of vaccine distributions per capita, 
