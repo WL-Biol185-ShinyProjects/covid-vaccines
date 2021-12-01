@@ -1,6 +1,6 @@
 library(shiny)
 library(shinydashboard)
-
+library(threejs)
 
 dashboardPage(skin = "green",
               
@@ -63,7 +63,8 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Global",
               
-          
+            library(threejs),
+            
              box(width = 12,
               p("The interactive globe above displays the relative number of vaccines 
               distributed to each country specific to a vaccine manufacturers.  
