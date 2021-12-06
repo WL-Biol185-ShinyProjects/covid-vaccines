@@ -172,8 +172,7 @@ function(input, output, session) {
   })
   
   output$CountryBox <- renderValueBox({
-    
-    pop_hop_fully <- read.csv("GDP_population_vaccine.csv")
+    pop_hop_fully <- read.csv("CSVs/GDP_population_vaccine.csv")
     pop_hop_fully <- pop_hop_fully %>%
       filter(Country_Region == input$Country) %>%
       filter(!(is.na(People_partially_vaccinated)))
