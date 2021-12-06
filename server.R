@@ -49,11 +49,11 @@ function(input, output, session) {
   
   output$percapita <- renderPlot({ 
     
-    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    time_series_covid19_vaccine_global <- read.csv("CSVs/time_series_covid19_vaccine_global.csv")
     hopkins <- time_series_covid19_vaccine_global
     
     #left join hopkins with world cities in order to get population to do fully vaccinated per capita
-    country_pop <- read.csv("population_by_country_2020.csv") %>%
+    country_pop <- read.csv("CSVs/population_by_country_2020.csv") %>%
       mutate(Country..or.dependency. = as.character(Country..or.dependency.)) %>%
       mutate(pop = Population..2020.)
     
@@ -88,8 +88,8 @@ function(input, output, session) {
   
   
   output$globalvariants <- renderPlot ({ 
-    setwd("~/covid-vaccines/CSVs")
-    variants <- read.csv("covid-variants.csv")
+    
+    variants <- read.csv("CSVs/covid-variants.csv")
     
     
     variants_date <- variants %>%
@@ -138,7 +138,7 @@ function(input, output, session) {
   
   output$VaccinatedBox <- renderValueBox({
     
-    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    time_series_covid19_vaccine_global <- read.csv("CSVs/time_series_covid19_vaccine_global.csv")
     hopkins <- time_series_covid19_vaccine_global %>%
       filter(Date == "2021-10-25") 
   
@@ -196,9 +196,9 @@ function(input, output, session) {
   
   output$socioeconomicsbox <- renderPlot({
 
-    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    time_series_covid19_vaccine_global <- read.csv("CSVs/time_series_covid19_vaccine_global.csv")
     hopkins <- time_series_covid19_vaccine_global
-    GDP_per_capita <- read.csv("~/covid-vaccines/CSVs/GDP_per_capita.csv")
+    GDP_per_capita <- read.csv("CSVs/GDP_per_capita.csv")
 
     hopkins <- hopkins %>%
       filter(Date == "2021-10-25") %>%
@@ -221,7 +221,7 @@ function(input, output, session) {
       filter(Date == "2021-10-25") %>%
       filter(!is.na(People_fully_vaccinated))
     
-    country_pop <- read.csv("population_by_country_2020.csv") %>%
+    country_pop <- read.csv("CSVs/population_by_country_2020.csv") %>%
       mutate(Country..or.dependency. = as.character(Country..or.dependency.)) %>%
       mutate(pop = Population..2020.)
 
@@ -250,7 +250,7 @@ function(input, output, session) {
   
   output$PercentVaccinatedHeatMap <- renderLeaflet({
     
-    time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+    time_series_covid19_vaccine_global <- read.csv("CSVs/time_series_covid19_vaccine_global.csv")
     hopkins <- time_series_covid19_vaccine_global
     
     hopkins <- hopkins %>%
@@ -259,7 +259,7 @@ function(input, output, session) {
       filter(Country_Region != "US (Aggregate)") %>%
       filter(Country_Region != "World")
     
-    population_by_country <- read.csv("~/covid-vaccines/CSVs/population_by_country_2020.csv")
+    population_by_country <- read.csv("CSVs/population_by_country_2020.csv")
     
     hopkins$Country_Region[154] <- "United States"
     hopkins$Country_Region[143] <- "Taiwan"
@@ -273,7 +273,7 @@ function(input, output, session) {
     
     
     world_geo <- readOGR("/home/gregg/countries.geo.json")
-    world_geo_vax <- read.csv("~/covid-vaccines/CSVs/world_geo_vax1.csv") 
+    world_geo_vax <- read.csv("CSVs/world_geo_vax1.csv") 
     
     
     world_geo@data <- left_join(world_geo@data, world_geo_vax, by = "name", "name")
@@ -322,7 +322,7 @@ function(input, output, session) {
   
   output$PartiallyVaccinatedHeatmap <-  renderLeaflet({
       
-      time_series_covid19_vaccine_global <- read_csv("https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/global_data/time_series_covid19_vaccine_global.csv")
+      time_series_covid19_vaccine_global <- read.csv("CSVs/time_series_covid19_vaccine_global.csv")
       hopkins <- time_series_covid19_vaccine_global
       
       hopkins <- hopkins %>%
@@ -331,7 +331,7 @@ function(input, output, session) {
         filter(Country_Region != "US (Aggregate)") %>%
         filter(Country_Region != "World")
       
-      population_by_country <- read.csv("~/covid-vaccines/CSVs/population_by_country_2020.csv")
+      population_by_country <- read.csv("CSVs/population_by_country_2020.csv")
       
       hopkins$Country_Region[154] <- "United States"
       hopkins$Country_Region[143] <- "Taiwan"
@@ -345,7 +345,7 @@ function(input, output, session) {
       
       
       world_geo <- readOGR("/home/gregg/countries.geo.json")
-      world_geo_vax <- read.csv("~/covid-vaccines/CSVs/world_geo_vax1.csv") 
+      world_geo_vax <- read.csv("CSVs/world_geo_vax1.csv") 
       
       
       world_geo@data <- left_join(world_geo@data, world_geo_vax, by = "name", "name")
