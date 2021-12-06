@@ -62,9 +62,10 @@ function(input, output, session) {
       mutate(World.Share = gsub("%", "", World.Share, fixed = TRUE)) %>%
       mutate(World.Share = as.numeric(World.Share))
     
-    ggplot(pop_hopkins_fully, aes(reorder(Country_Region, fully_per_capita), 
-
-                                  fully_per_capita, fill = World.Share)) + 
+    
+    
+    
+    ggplot(pop_hopkins_fully, aes(reorder(Country_Region, fully_per_capita),fully_per_capita, fill = World.Share)) +
       geom_bar(stat = "identity") +
       theme_classic() +
       labs(title = "Fully Vaccinated Rates Per Capita (Countries with Highest Number of Vaccines Distribued)", 
