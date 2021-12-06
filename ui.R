@@ -63,7 +63,6 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Global",
               
-            library(threejs),
             
              box(width = 12,
               p("The interactive globe above displays the relative number of vaccines 
