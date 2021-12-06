@@ -33,6 +33,7 @@ function(input, output, session) {
   
   output$globe <- renderGlobe({
   
+    setwd("~/covid-vaccines")
     worldcities_all_manu <- read.csv("CSVs/worldcities_all_manu.csv")
     
     data(worldcities_all_manu, package = "maps") #injection scope, never ever do this again
