@@ -29,6 +29,8 @@ function(input, output) {
 function(input, output, session) {
   
  
+  
+  
   output$globe <- renderGlobe({
   
     setwd("~/covid-vaccines/CSVs")
