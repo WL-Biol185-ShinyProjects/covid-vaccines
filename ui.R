@@ -35,10 +35,7 @@ dashboardPage(skin = "green",
  
     sidebarMenu(
       
-      menuItem("Home", tabName = "Home",
-               icon = icon("home", lib = "glyphicon")),
-      
-      menuItem("Global", tabName = "Global", 
+      menuItem("Home", tabName = "Home", 
                icon = icon("globe", lib = "glyphicon")),
       
       menuItem("Variants", tabName = "Variants", 
@@ -64,21 +61,12 @@ dashboardPage(skin = "green",
       
       tabItem(tabName = "Home",
               
-      
-             box(width = 4, align = "center", size = 30,
-                 p("Covid-19 Vaccines and Variants, By: Katie Kern, Jack Donahue, Emma Aldrich")),
-            
+             p(strong("Welcome to the Covid Vaccine Information Hub, please click
+                      on the tabs to explore"), align = "center"),
              
-              
-              #insert fluid row here 
-              img(src = "covid-info.png", style = "position = absolute")),
-              
-      
-      tabItem(tabName = "Global",
-              
-            
+             
              box(width = 12,
-              p("The interactive globe above displays the relative number of vaccines 
+              p("The interactive globe below displays the relative number of vaccines 
               distributed to each country specific to a vaccine manufacturers.  
               Use the interactive drop-down menu to explore different globes for the vaccine 
               manufacturers of interest. The spike location on the globe rests at the capital 
