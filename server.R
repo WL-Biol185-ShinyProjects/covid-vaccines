@@ -28,7 +28,7 @@ function(input, output) {
 
 function(input, output, session) {
   
-  
+  setwd("~/covid-vaccines/CSVs")
   worldcities_all_manu <- read.csv("~/covid-vaccines/CSVs/worldcities_all_manu.csv")
   
   
