@@ -15,20 +15,8 @@ library(RColorBrewer)
 library(leaflet)
 
 
-function(input, output) {
-
-  output$summary <- renderText({
-    summary(x())
-  })
-
-
-
-}
-
 
 function(input, output, session) {
-  
- 
   
   
   output$globe <- renderGlobe({
