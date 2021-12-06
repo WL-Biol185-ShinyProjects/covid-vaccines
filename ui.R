@@ -62,7 +62,7 @@ dashboardPage(skin = "green",
       tabItem(tabName = "Home",
               
              p(strong("Welcome to the Covid Vaccine Information Hub, please click
-                      on the tabs to explore"), align = "center"),
+                      on the tabs to explore!"), align = "center"),
              
              
              box(width = 12,
@@ -71,7 +71,7 @@ dashboardPage(skin = "green",
               Use the interactive drop-down menu to explore different globes for the vaccine 
               manufacturers of interest. The spike location on the globe rests at the capital 
               of the country. 
-              Countries with no spikes indicate missing data, not zero vaccines distributed")),
+              Countries with no spikes indicate missing data, not zero vaccines distributed.", align = "center")),
            
   
             selectInput(
@@ -98,7 +98,7 @@ dashboardPage(skin = "green",
                                    countries over 2020 to 2021 timeline. 
                                    As you explore, please note
                                    the Delta variant of COVID-19 is the most recent prolific variant and 
-                                   the data is as of October 25th, 2021" )),
+                                   the data is as of October 25th, 2021", align ="center")),
                 
                 box(width = 12, plotOutput("globalvariants")),
                 
@@ -204,7 +204,7 @@ dashboardPage(skin = "green",
               p("The data maniputlated on this page is intended to illustrate
                         disparities between vaccination rates across countries in different 
                         socioeconmic standings. We hope these
-                        graphical displays accuratly display this global issue.")),
+                        graphical displays accuratly display this global issue.", align = "center")),
               
               box(width = 12, plotOutput("socioeconomicsbox")),
               
@@ -250,7 +250,7 @@ dashboardPage(skin = "green",
                   p("The below panels show an interactive map of the percent of 
                     people fully vaccinated and percent partially vaccinated across 
                     the globe. Note that partially vaccinated individuals include fully 
-                    vaccinated individuals. Click on each country to view its statistics")),
+                    vaccinated individuals. Click on each country to view its statistics", align = "center")),
               
               box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
               
@@ -269,7 +269,7 @@ dashboardPage(skin = "green",
                     with China recording the highest vaccine distributed per capita and India 
                     reporting the lowest. This leads to global questions such as accuracy in 
                     reporting data, access to life saving vaccines, and other barriers that may 
-                    distinguish these countries")),
+                    distinguish these countries", align = "center")),
               
               box(width = 12, plotOutput("percapita"))
               )
