@@ -12,6 +12,7 @@ library(tibble)
 library(dplyr)
 library(rgdal)
 library(RColorBrewer)
+library(leaflet)
 
 
 function(input, output) {
