@@ -196,10 +196,11 @@ dashboardPage(skin = "green",
               
               box(width = 12,
               p("The data maniputlated on this page is intended to illustrate
-                disparities between vaccination rates across countries in different 
-                socioeconmic standings. We hope these
-                graphical displays accuratly display this global issue.",
-                align = "center")),
+                        disparities between vaccination rates across countries in different 
+                        socioeconmic standings. We hope these
+                        graphical displays accuratly display this global issue."),
+                        align = "center"),
+
               
               box(width = 12, plotOutput("socioeconomicsbox")),
               
@@ -245,7 +246,7 @@ dashboardPage(skin = "green",
                   p("The below panels show an interactive map of the percent of 
                     people fully vaccinated and percent partially vaccinated across 
                     the globe. Note that partially vaccinated individuals include fully 
-                    vaccinated individuals. Click on each country to view its statistics", align = "center")),
+                    vaccinated individuals. Click on each country to view its statistics"), align = "center"),
               
               box(width = 12, leafletOutput("PercentVaccinatedHeatMap")),
               
@@ -265,7 +266,8 @@ dashboardPage(skin = "green",
                     reporting the lowest. This leads to global questions such as accuracy in 
                     reporting data, access to life saving vaccines, and other barriers that may 
                     distinguish these countries", 
-                    align = "center")),
+                    align = "center")), 
+
               
                 box(width = 12, plotOutput("percapita"))
               )
@@ -282,8 +284,7 @@ dashboardPage(skin = "green",
     ),
     
     
-    uiOutput("hearbeat")
-    ),
+    uiOutput("hearbeat"),
 
 
   tags$head(tags$style(HTML('
@@ -293,4 +294,4 @@ dashboardPage(skin = "green",
          font-size: 24px;
        }'
    )))
-  )
+  ))

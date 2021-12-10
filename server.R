@@ -48,7 +48,7 @@ function(input, output, session) {
     
     time_series_covid19_vaccine_global <- 
       read.csv("CSVs/time_series_covid19_vaccine_global.csv")
-    
+
     hopkins <- time_series_covid19_vaccine_global
     
     country_pop <- read.csv("CSVs/population_by_country_2020.csv") %>%
@@ -86,7 +86,6 @@ function(input, output, session) {
             subtitle = "Colored by % of World Population for Each Country", 
                    y = "Fully Vaccinated Individuals per Capita",
                    x = "Country")
-    
     })
   
   
@@ -94,13 +93,11 @@ function(input, output, session) {
     
     variants <- read.csv("CSVs/covid-variants.csv")
     
-    
     variants_date <- variants %>%
       mutate(year = year(as_date(date))) %>%
       mutate(month = month(as_date(date))) %>%
       mutate(day = day(as_date(date))) %>%
       filter(variant == "Alpha" | variant == "Delta" | variant == "Gamma" | variant == "Iota" | variant == "Beta" | variant == "Eta" | variant == "Lambda")
-    
     
     variants_popular <- variants_date %>%
       filter(location == input$location) %>%
@@ -122,7 +119,6 @@ function(input, output, session) {
                                                                                                  ifelse(month == 11, "Nov",
                                                                                                         ifelse(month == 12, "Dec", NA))))))))))))) %>%
       mutate(month_write = factor(month_write, levels = c("Dec", "Nov", "Oct", "Sep", "Aug", "Jul", "Jun", "May", "Apr", "Mar", "Feb", "Jan")))
-    
     
     ggplot(variants_popular, aes(month_write, n, fill = variant)) +
       geom_bar(stat = "identity") +
